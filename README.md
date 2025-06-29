@@ -24,9 +24,13 @@ preparation-csis-fall-2025/
 │ ├── csis1175_intro_prog/
 │ ├── csis1280_web_dev/
 │ ├── csis2200_analysis/
-│ └── csis2260_os/
+│ ├── csis2260_os/
+│ └── crash_course/       # CrashCourse CS summaries
 ├── assignments/ # Drafts or plans for assignments
-│ └── csis1175/
+│ ├── csis1175_intro_prog/
+│ ├── csis1280_web_dev/
+│ ├── csis2200_analysis/
+│ └── csis2260_os/
 ├── mini-projects/ # Practice code and experiments
 └── journal/ # Daily or weekly logs
 ```
