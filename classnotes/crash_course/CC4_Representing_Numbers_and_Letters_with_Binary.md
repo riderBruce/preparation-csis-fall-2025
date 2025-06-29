@@ -1,32 +1,38 @@
 # 🧠 Representing Numbers and Letters with Binary  
-_Crash Course Computer Science #4_
+
+Crash Course Computer Science #4
 
 ## 💾 Summary
 
 This episode explains how computers store and represent numbers, letters, and other data using binary.
 
 ### 🔢 Binary Numbers
+
 - **Binary** is similar to decimal—each digit’s position represents a value.
 - A **bit** is a binary digit (`0` or `1`), and a **byte** is a group of 8 bits.
 - **32-bit** systems can represent values up to ±2 billion.
 - **64-bit** systems can handle up to ±9.2 quintillion, making them suitable for large-scale data like population or debt figures.
 
 ### 🔬 Floating Point Numbers
+
 - Floating point numbers use 32 bits and are stored using **scientific notation**  
   _(e.g., `0.6259 × 10³`)_
 
 ### 🔡 Letters and Characters
+
 - In the 1600s, **Francis Bacon** used 5-bit codes to represent the 26 letters of the alphabet.
 - In **1963**, the **ASCII** standard (7 bits) was introduced, representing 128 characters.
 - **Extended ASCII** expanded the range but still didn’t support all global languages.
 
 ### 🌍 The Need for Interoperability
+
 - Countries developed incompatible **multi-byte encoding systems** to support their own characters.
 - To solve this problem, **Unicode** was created in **1992**:
   - Uses **16 bits**
   - Includes global alphabets, math symbols, and even **emoji**!
 
 ### 🎨 Beyond Text
+
 - Binary numbers can represent **sounds**, **colors**, **images**, and **video**.
 - Underneath it all, computers store everything as long sequences of `1`s and `0`s.
 

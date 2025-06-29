@@ -1,5 +1,6 @@
-# 🧠 Week 2 – Tech Video Summary  
-**CrashCourse Computer Science #2: Electronic Computing**
+# 🧠 Electronic Computing
+
+CrashCourse Computer Science #2
 
 After the World Wars, the growing demands of population, warfare, and bureaucracy required machines that could process large amounts of data. This led to several key developments in computing hardware:
 
@@ -13,13 +14,13 @@ Today’s computers use transistors smaller than **50 nanometers** — fast, ene
 
 ---
 
-### 📝 In Summary:
+## 📝 In Summary
 
 > Modern computing evolved through three key stages — from **relays** ➝ to **vacuum tubes** ➝ to **transistors** — each step making computers smaller, faster, and more reliable.
 
 ---
 
-### 🧠 Reflection
+## 🧠 Reflection
 
 - This summary makes me feel like I'm already experiencing the kind of class I will take in the future.  
 - I need to focus on the content and truly make it part of my own knowledge.  

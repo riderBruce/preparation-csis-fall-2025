@@ -1,4 +1,6 @@
-### ☀️ Computer Science - Crash Course Episode 1
+# ☀️ Computer Science
+
+Crash Course Episode 1
 
 This week, I watched the first episode of CrashCourse Computer Science. It introduced the history of computing and how we arrived at today’s Electronic Age.
 

@@ -1,9 +1,8 @@
 # How Computers Calculate: The ALU
-_Crash Course #5_
+
+Crash Course #5
 
 The **ALU** (Arithmetic Logic Unit) consists of **Arithmetic Units** and **Logic Units**.
-
----
 
 ## 🧮 Arithmetic Units
 
@@ -22,11 +21,14 @@ The **ALU** (Arithmetic Logic Unit) consists of **Arithmetic Units** and **Logic
   → It allows calculation of 8-bit binary numbers — a major advancement.
 
 ### ⚠️ Overflow
+
 - Overflow happens when the result **exceeds the bit limit** of the adder.
 - To handle bigger numbers, computers use **16-bit, 32-bit, or even wider adders**.
 
 ### 🛠️ ALU Operations
+
 Modern ALUs typically support **at least 8 operations**:
+
 - ADD  
 - ADD with Carry  
 - SUBTRACT  
