@@ -1,0 +1,34 @@
+# Visual Studio settings
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# NuGet packages
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Rider (JetBrains)
+.idea/
+
+# ReSharper
+*.DotSettings.user

@@ -3,6 +3,7 @@
 Welcome to my private preparation repository for the **Fall 2025 Post-Baccalaureate Diploma in Computing and Information Systems** at Douglas College.
 
 This repository is a personal knowledge base and workspace where I organize:
+
 - Class notes
 - Weekly reflections
 - Assignment drafts
@@ -13,7 +14,7 @@ This repository is a personal knowledge base and workspace where I organize:
 
 ## 📁 Repository Structure
 
-```
+```text
 preparation-csis-fall-2025/
 ├── README.md
 ├── docs/ # Main documentation and weekly logs
@@ -32,11 +33,10 @@ preparation-csis-fall-2025/
 │ ├── csis2200_analysis/
 │ └── csis2260_os/
 ├── mini-projects/ # Practice code and experiments
+│ └── csis1175contactbook/
+│   └── MiniContactBook/
 └── journal/ # Daily or weekly logs
 ```
-
-
----
 
 ## 🧭 How I’ll Use This Repo
 
@@ -44,8 +44,6 @@ preparation-csis-fall-2025/
 - 📝 **Summarize lectures** in `classnotes/`
 - ⚙️ **Prototype small tools** or experiments in `mini-projects/`
 - 🧠 **Reflect** on learning journey in `journal/`
-
----
 
 ## 🙋🏻 About Me
 
