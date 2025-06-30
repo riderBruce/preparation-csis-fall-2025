@@ -36,6 +36,11 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.btnAddContact = new System.Windows.Forms.Button();
             this.lstContacts = new System.Windows.Forms.ListBox();
+            this.btnDeleteContact = new System.Windows.Forms.Button();
+            this.btnSaveToFile = new System.Windows.Forms.Button();
+            this.btnLoadFromFile = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameLable
@@ -44,7 +49,7 @@
             this.NameLable.Location = new System.Drawing.Point(45, 49);
             this.NameLable.Name = "NameLable";
             this.NameLable.Size = new System.Drawing.Size(55, 18);
-            this.NameLable.TabIndex = 0;
+            this.NameLable.TabIndex = 5;
             this.NameLable.Text = "Name";
             this.NameLable.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -54,7 +59,7 @@
             this.PhoneLable.Location = new System.Drawing.Point(45, 110);
             this.PhoneLable.Name = "PhoneLable";
             this.PhoneLable.Size = new System.Drawing.Size(60, 18);
-            this.PhoneLable.TabIndex = 1;
+            this.PhoneLable.TabIndex = 6;
             this.PhoneLable.Text = "Phone";
             this.PhoneLable.Click += new System.EventHandler(this.label2_Click);
             // 
@@ -64,7 +69,7 @@
             this.EmailLabel.Location = new System.Drawing.Point(45, 175);
             this.EmailLabel.Name = "EmailLabel";
             this.EmailLabel.Size = new System.Drawing.Size(50, 18);
-            this.EmailLabel.TabIndex = 2;
+            this.EmailLabel.TabIndex = 7;
             this.EmailLabel.Text = "Email";
             this.EmailLabel.Click += new System.EventHandler(this.label3_Click);
             // 
@@ -73,28 +78,28 @@
             this.txtName.Location = new System.Drawing.Point(159, 49);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(183, 28);
-            this.txtName.TabIndex = 3;
+            this.txtName.TabIndex = 0;
             // 
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(159, 110);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(183, 28);
-            this.txtPhone.TabIndex = 3;
+            this.txtPhone.TabIndex = 1;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(159, 175);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(183, 28);
-            this.txtEmail.TabIndex = 3;
+            this.txtEmail.TabIndex = 2;
             // 
             // btnAddContact
             // 
             this.btnAddContact.Location = new System.Drawing.Point(48, 241);
             this.btnAddContact.Name = "btnAddContact";
-            this.btnAddContact.Size = new System.Drawing.Size(294, 104);
-            this.btnAddContact.TabIndex = 4;
+            this.btnAddContact.Size = new System.Drawing.Size(294, 61);
+            this.btnAddContact.TabIndex = 3;
             this.btnAddContact.Text = "Add Contact";
             this.btnAddContact.UseVisualStyleBackColor = true;
             this.btnAddContact.Click += new System.EventHandler(this.btnAddContact_Click);
@@ -105,14 +110,68 @@
             this.lstContacts.ItemHeight = 18;
             this.lstContacts.Location = new System.Drawing.Point(382, 49);
             this.lstContacts.Name = "lstContacts";
-            this.lstContacts.Size = new System.Drawing.Size(383, 310);
-            this.lstContacts.TabIndex = 5;
+            this.lstContacts.Size = new System.Drawing.Size(383, 328);
+            this.lstContacts.TabIndex = 4;
+            // 
+            // btnDeleteContact
+            // 
+            this.btnDeleteContact.Location = new System.Drawing.Point(48, 337);
+            this.btnDeleteContact.Name = "btnDeleteContact";
+            this.btnDeleteContact.Size = new System.Drawing.Size(294, 58);
+            this.btnDeleteContact.TabIndex = 8;
+            this.btnDeleteContact.Text = "Delete Contact";
+            this.btnDeleteContact.UseVisualStyleBackColor = true;
+            this.btnDeleteContact.Click += new System.EventHandler(this.btnDeleteContact_Click);
+            // 
+            // btnSaveToFile
+            // 
+            this.btnSaveToFile.Location = new System.Drawing.Point(48, 427);
+            this.btnSaveToFile.Name = "btnSaveToFile";
+            this.btnSaveToFile.Size = new System.Drawing.Size(294, 57);
+            this.btnSaveToFile.TabIndex = 9;
+            this.btnSaveToFile.Text = "Save to File";
+            this.btnSaveToFile.UseVisualStyleBackColor = true;
+            this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+            // 
+            // btnLoadFromFile
+            // 
+            this.btnLoadFromFile.Location = new System.Drawing.Point(48, 517);
+            this.btnLoadFromFile.Name = "btnLoadFromFile";
+            this.btnLoadFromFile.Size = new System.Drawing.Size(294, 57);
+            this.btnLoadFromFile.TabIndex = 9;
+            this.btnLoadFromFile.Text = "Load from File";
+            this.btnLoadFromFile.UseVisualStyleBackColor = true;
+            this.btnLoadFromFile.Click += new System.EventHandler(this.btnLoadFromFile_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(382, 427);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(244, 28);
+            this.txtSearch.TabIndex = 10;
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(660, 427);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(98, 81);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // contact_book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 380);
+            this.ClientSize = new System.Drawing.Size(800, 607);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.btnLoadFromFile);
+            this.Controls.Add(this.btnSaveToFile);
+            this.Controls.Add(this.btnDeleteContact);
             this.Controls.Add(this.lstContacts);
             this.Controls.Add(this.btnAddContact);
             this.Controls.Add(this.txtEmail);
@@ -139,6 +198,11 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Button btnAddContact;
         private System.Windows.Forms.ListBox lstContacts;
+        private System.Windows.Forms.Button btnDeleteContact;
+        private System.Windows.Forms.Button btnSaveToFile;
+        private System.Windows.Forms.Button btnLoadFromFile;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 
