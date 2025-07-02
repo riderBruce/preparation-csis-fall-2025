@@ -35,12 +35,15 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.btnAddContact = new System.Windows.Forms.Button();
-            this.lstContacts = new System.Windows.Forms.ListBox();
-            this.btnDeleteContact = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSaveToFile = new System.Windows.Forms.Button();
             this.btnLoadFromFile = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.lvContacts = new System.Windows.Forms.ListView();
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colPhone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colEmail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // NameLable
@@ -104,24 +107,15 @@
             this.btnAddContact.UseVisualStyleBackColor = true;
             this.btnAddContact.Click += new System.EventHandler(this.btnAddContact_Click);
             // 
-            // lstContacts
+            // btnDelete
             // 
-            this.lstContacts.FormattingEnabled = true;
-            this.lstContacts.ItemHeight = 18;
-            this.lstContacts.Location = new System.Drawing.Point(382, 49);
-            this.lstContacts.Name = "lstContacts";
-            this.lstContacts.Size = new System.Drawing.Size(383, 328);
-            this.lstContacts.TabIndex = 4;
-            // 
-            // btnDeleteContact
-            // 
-            this.btnDeleteContact.Location = new System.Drawing.Point(48, 337);
-            this.btnDeleteContact.Name = "btnDeleteContact";
-            this.btnDeleteContact.Size = new System.Drawing.Size(294, 58);
-            this.btnDeleteContact.TabIndex = 8;
-            this.btnDeleteContact.Text = "Delete Contact";
-            this.btnDeleteContact.UseVisualStyleBackColor = true;
-            this.btnDeleteContact.Click += new System.EventHandler(this.btnDeleteContact_Click);
+            this.btnDelete.Location = new System.Drawing.Point(48, 337);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(294, 58);
+            this.btnDelete.TabIndex = 8;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSaveToFile
             // 
@@ -145,16 +139,16 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(382, 427);
+            this.txtSearch.Location = new System.Drawing.Point(382, 517);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(244, 28);
             this.txtSearch.TabIndex = 10;
-            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(660, 427);
+            this.btnSearch.Location = new System.Drawing.Point(660, 517);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(98, 81);
             this.btnSearch.TabIndex = 11;
@@ -162,17 +156,51 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // lvContacts
+            // 
+            this.lvContacts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colName,
+            this.colPhone,
+            this.colEmail});
+            this.lvContacts.FullRowSelect = true;
+            this.lvContacts.GridLines = true;
+            this.lvContacts.HideSelection = false;
+            this.lvContacts.Location = new System.Drawing.Point(382, 241);
+            this.lvContacts.Name = "lvContacts";
+            this.lvContacts.Size = new System.Drawing.Size(383, 243);
+            this.lvContacts.TabIndex = 12;
+            this.lvContacts.UseCompatibleStateImageBehavior = false;
+            this.lvContacts.View = System.Windows.Forms.View.Details;
+            this.lvContacts.SelectedIndexChanged += new System.EventHandler(this.lvContacts_SelectedIndexChanged);
+            // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            this.colName.Width = 100;
+            // 
+            // colPhone
+            // 
+            this.colPhone.Text = "Phone";
+            this.colPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.colPhone.Width = 100;
+            // 
+            // colEmail
+            // 
+            this.colEmail.Text = "Email";
+            this.colEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.colEmail.Width = 150;
+            // 
             // contact_book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 607);
+            this.Controls.Add(this.lvContacts);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnLoadFromFile);
             this.Controls.Add(this.btnSaveToFile);
-            this.Controls.Add(this.btnDeleteContact);
-            this.Controls.Add(this.lstContacts);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddContact);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtPhone);
@@ -197,12 +225,15 @@
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Button btnAddContact;
-        private System.Windows.Forms.ListBox lstContacts;
-        private System.Windows.Forms.Button btnDeleteContact;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSaveToFile;
         private System.Windows.Forms.Button btnLoadFromFile;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ListView lvContacts;
+        private System.Windows.Forms.ColumnHeader colName;
+        private System.Windows.Forms.ColumnHeader colPhone;
+        private System.Windows.Forms.ColumnHeader colEmail;
     }
 }
 
