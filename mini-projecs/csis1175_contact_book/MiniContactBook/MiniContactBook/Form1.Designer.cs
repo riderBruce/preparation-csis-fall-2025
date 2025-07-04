@@ -44,6 +44,8 @@
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPhone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colEmail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnExportCSV = new System.Windows.Forms.Button();
+            this.btnExportJSON = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameLable
@@ -141,14 +143,14 @@
             // 
             this.txtSearch.Location = new System.Drawing.Point(382, 517);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(244, 28);
+            this.txtSearch.Size = new System.Drawing.Size(424, 28);
             this.txtSearch.TabIndex = 10;
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(660, 517);
+            this.btnSearch.Location = new System.Drawing.Point(812, 517);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(98, 81);
             this.btnSearch.TabIndex = 11;
@@ -165,12 +167,14 @@
             this.lvContacts.FullRowSelect = true;
             this.lvContacts.GridLines = true;
             this.lvContacts.HideSelection = false;
-            this.lvContacts.Location = new System.Drawing.Point(382, 241);
+            this.lvContacts.Location = new System.Drawing.Point(382, 49);
             this.lvContacts.Name = "lvContacts";
-            this.lvContacts.Size = new System.Drawing.Size(383, 243);
+            this.lvContacts.Size = new System.Drawing.Size(528, 435);
+            this.lvContacts.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvContacts.TabIndex = 12;
             this.lvContacts.UseCompatibleStateImageBehavior = false;
             this.lvContacts.View = System.Windows.Forms.View.Details;
+            this.lvContacts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvContacts_ColumnClick);
             this.lvContacts.SelectedIndexChanged += new System.EventHandler(this.lvContacts_SelectedIndexChanged);
             // 
             // colName
@@ -190,11 +194,33 @@
             this.colEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.colEmail.Width = 150;
             // 
+            // btnExportCSV
+            // 
+            this.btnExportCSV.Location = new System.Drawing.Point(48, 606);
+            this.btnExportCSV.Name = "btnExportCSV";
+            this.btnExportCSV.Size = new System.Drawing.Size(294, 47);
+            this.btnExportCSV.TabIndex = 13;
+            this.btnExportCSV.Text = "Export To CSV";
+            this.btnExportCSV.UseVisualStyleBackColor = true;
+            this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
+            // 
+            // btnExportJSON
+            // 
+            this.btnExportJSON.Location = new System.Drawing.Point(48, 678);
+            this.btnExportJSON.Name = "btnExportJSON";
+            this.btnExportJSON.Size = new System.Drawing.Size(294, 52);
+            this.btnExportJSON.TabIndex = 14;
+            this.btnExportJSON.Text = "Export to JSON";
+            this.btnExportJSON.UseVisualStyleBackColor = true;
+            this.btnExportJSON.Click += new System.EventHandler(this.btnExportJSON_Click);
+            // 
             // contact_book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 607);
+            this.ClientSize = new System.Drawing.Size(949, 753);
+            this.Controls.Add(this.btnExportJSON);
+            this.Controls.Add(this.btnExportCSV);
             this.Controls.Add(this.lvContacts);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
@@ -234,6 +260,8 @@
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ColumnHeader colPhone;
         private System.Windows.Forms.ColumnHeader colEmail;
+        private System.Windows.Forms.Button btnExportCSV;
+        private System.Windows.Forms.Button btnExportJSON;
     }
 }
 
