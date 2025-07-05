@@ -114,7 +114,7 @@
             this.btnDelete.Location = new System.Drawing.Point(48, 337);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(294, 58);
-            this.btnDelete.TabIndex = 8;
+            this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -124,7 +124,7 @@
             this.btnSaveToFile.Location = new System.Drawing.Point(48, 427);
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(294, 57);
-            this.btnSaveToFile.TabIndex = 9;
+            this.btnSaveToFile.TabIndex = 5;
             this.btnSaveToFile.Text = "Save to File";
             this.btnSaveToFile.UseVisualStyleBackColor = true;
             this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
@@ -134,7 +134,7 @@
             this.btnLoadFromFile.Location = new System.Drawing.Point(48, 517);
             this.btnLoadFromFile.Name = "btnLoadFromFile";
             this.btnLoadFromFile.Size = new System.Drawing.Size(294, 57);
-            this.btnLoadFromFile.TabIndex = 9;
+            this.btnLoadFromFile.TabIndex = 6;
             this.btnLoadFromFile.Text = "Load from File";
             this.btnLoadFromFile.UseVisualStyleBackColor = true;
             this.btnLoadFromFile.Click += new System.EventHandler(this.btnLoadFromFile_Click);
@@ -199,7 +199,7 @@
             this.btnExportCSV.Location = new System.Drawing.Point(48, 606);
             this.btnExportCSV.Name = "btnExportCSV";
             this.btnExportCSV.Size = new System.Drawing.Size(294, 47);
-            this.btnExportCSV.TabIndex = 13;
+            this.btnExportCSV.TabIndex = 7;
             this.btnExportCSV.Text = "Export To CSV";
             this.btnExportCSV.UseVisualStyleBackColor = true;
             this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
@@ -209,7 +209,7 @@
             this.btnExportJSON.Location = new System.Drawing.Point(48, 678);
             this.btnExportJSON.Name = "btnExportJSON";
             this.btnExportJSON.Size = new System.Drawing.Size(294, 52);
-            this.btnExportJSON.TabIndex = 14;
+            this.btnExportJSON.TabIndex = 8;
             this.btnExportJSON.Text = "Export to JSON";
             this.btnExportJSON.UseVisualStyleBackColor = true;
             this.btnExportJSON.Click += new System.EventHandler(this.btnExportJSON_Click);
@@ -235,7 +235,9 @@
             this.Controls.Add(this.PhoneLable);
             this.Controls.Add(this.NameLable);
             this.Name = "contact_book";
-            this.Text = "Contact Book";
+            this.Text = "Mini Contact Book";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

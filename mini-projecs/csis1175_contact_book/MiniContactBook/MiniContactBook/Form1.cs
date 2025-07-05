@@ -38,7 +38,7 @@ namespace MiniContactBook
 
         }
 
-        private void txtSearch_TextGrey()
+        private void SetSearchBoxToGrayText()
         {
             txtSearch.Text = "Search by Name";
             txtSearch.ForeColor = Color.Gray;
@@ -49,7 +49,7 @@ namespace MiniContactBook
             txtName.Clear();
             txtPhone.Clear();
             txtEmail.Clear();
-            txtSearch_TextGrey();
+            SetSearchBoxToGrayText();
             txtName.Focus(); // Set focus back to the name input field
             lvContacts.SelectedItems.Clear(); // Clear the selection in the ListView
         }
@@ -105,7 +105,8 @@ namespace MiniContactBook
 
             // Check for duplicate contacts
             bool duplicate = lvContacts.Items.Cast<ListViewItem>()
-                .Any(i => i.SubItems[0].Text == name && i.SubItems[1].Text == phone);
+                .Any(i => i.SubItems[0].Text == name 
+                       && i.SubItems[1].Text == phone);
 
             if (duplicate)
             {
@@ -124,20 +125,50 @@ namespace MiniContactBook
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lvContacts.View = View.Details;
+            lvContacts.FullRowSelect = true;
+            lvContacts.GridLines = true;
+            lvContacts.Font = new Font("Segoe UI", 10);
+
+            // Add toolTips to buttons
+            ToolTip tooltip = new ToolTip();
+            tooltip.SetToolTip(btnAddContact, "Add or Update Contact");
+            tooltip.SetToolTip(btnDelete, "Delete Selected Contact");
+            tooltip.SetToolTip(btnSaveToFile, "Save Contacts to File");
+            tooltip.SetToolTip(btnLoadFromFile, "Load Contacts from File");
+            tooltip.SetToolTip(btnSearch, "Search Contact by Name");
+            tooltip.SetToolTip(btnExportCSV, "Export Contacts to CSV");
+            tooltip.SetToolTip(btnExportJSON, "Export Contacts to JSON");
+
+            // Add Placeholder
+            txtName.ForeColor = Color.Gray;
+            txtName.Text = "Enter name";
+            txtName.GotFocus += RemovePlaceholder;
+            txtName.LostFocus += AddPlaceholder;
+
+            txtPhone.ForeColor = Color.Gray;
+            txtPhone.Text = "Enter phone";
+            txtPhone.GotFocus += RemovePlaceholder;
+            txtPhone.LostFocus += AddPlaceholder;
+
+            txtEmail.ForeColor = Color.Gray;
+            txtEmail.Text = "Enter email";
+            txtEmail.GotFocus += RemovePlaceholder;
+            txtEmail.LostFocus += AddPlaceholder;
+
+
             // Initialize the search text box
-            txtSearch_TextGrey();
+            SetSearchBoxToGrayText();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lvContacts.SelectedItems.Count > 0)
             {
-                var result = MessageBox.Show("Are you sure you want to delete the seleted contact?", "Confirm Delete", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("Are you sure you want to delete the seleted contact?", 
+                    "Confirm Delete", MessageBoxButtons.YesNo);
 
-                if (result != DialogResult.Yes)
-                {
-                    return; // User cancelled the deletion
-                }
+                if (result != DialogResult.Yes) { return; }
 
                 lvContacts.Items.Remove(lvContacts.SelectedItems[0]);
                 ClearInputFields();
@@ -155,9 +186,10 @@ namespace MiniContactBook
             {
                 foreach (ListViewItem item in lvContacts.Items)
                 {
-                    writer.WriteLine($"{item.SubItems[0].Text} | " +
-                                     $"{item.SubItems[1].Text} | " +
-                                     $"{item.SubItems[2].Text}");
+                    string line = $"{item.SubItems[0].Text} | " +
+                                  $"{item.SubItems[1].Text} | " +
+                                  $"{item.SubItems[2].Text}";
+                    writer.WriteLine(line);
                 }
             }
             MessageBox.Show($"Contacts saved to {filePath}", "Saved Successfully");
@@ -177,11 +209,18 @@ namespace MiniContactBook
                 foreach (string line in lines)
                 {
                     string[] parts = line.Split('|');
+                    if (parts.Length < 3)
+                    {
+                        MessageBox.Show($"Invalid contact format in line: {line}", "Format Error");
+                        continue; // Skip this line if it doesn't have enough parts
+                    }
+                    // Ensure there are exactly 3 parts: Name, Phone, Email
                     if (parts.Length == 3)
                     {
                         string name = parts[0].Trim();
                         string phone = parts[1].Trim();
                         string email = parts[2].Trim();
+
                         ListViewItem item = new ListViewItem(name);
                         item.SubItems.Add(phone);
                         item.SubItems.Add(email);
@@ -242,7 +281,7 @@ namespace MiniContactBook
         {
             if (String.IsNullOrWhiteSpace(txtSearch.Text))
             {
-                txtSearch_TextGrey();
+                SetSearchBoxToGrayText();
             }
         }
 
@@ -347,6 +386,28 @@ namespace MiniContactBook
             File.WriteAllText(filePath, json);
 
             MessageBox.Show($"Contacts exported to {filePath}", "JSON Exported");
+        }
+
+        private void RemovePlaceholder(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.ForeColor == Color.Gray)
+            {
+                tb.Text = "";
+                tb.ForeColor = Color.Black;
+            }
+        }
+
+        private void AddPlaceholder(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (string.IsNullOrWhiteSpace(tb.Text))
+            {
+                if (tb == txtName) tb.Text = "Enter name";
+                else if (tb == txtPhone) tb.Text = "Enter phone";
+                else if (tb == txtEmail) tb.Text = "Enter email";
+                tb.ForeColor = Color.Gray;
+            }
         }
 
     }
