@@ -22,7 +22,6 @@ It's part of my learning practice for the **CSIS1175 – Introduction to Program
 
 ![UI Screenshot](/mini-projects/csis1175_contact_book/Screenshot/Screenshot.png)
 
-![UI Screenshot](/mini-projecs/csis1175_contact_book/Screenshot/Screenshot.png)
 
 ---
 
