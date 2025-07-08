@@ -1,4 +1,5 @@
 # 📅 CSIS 1280 – Week 1 Plan: Web Development Basics
+
 ## Day 1 – Overview & Setup
 
     What is web development?
@@ -54,3 +55,28 @@
     Write a weekly journal
 
     Plan what to learn next (JavaScript basics, DOM interaction)
+
+## 🔮 What’s Next?
+
+Since our goal for the week (Web Dev Basics) is already accomplished, we have two great options:
+
+### Option 1: More Mini Projects (Highly Recommended)
+
+We can:
+
+- Build a Weather App (API practice)
+- Add LocalStorage to the Todo App
+- Create a Rock Paper Scissors Game
+- Make a Pomodoro Timer
+- Build a Form Validator
+- Or even try a Mini Blog using HTML/CSS/JS
+
+These will reinforce and stretch everything you’ve learned.
+
+### Option 2: Go Deeper into Web Dev Concepts
+
+We could:
+
+- Learn more advanced CSS (flexbox, grid layout)
+- Understand semantic HTML and accessibility
+- Explore JavaScript modules or fetch() and API calls
