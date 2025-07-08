@@ -1,8 +1,8 @@
 const button = document.getElementById("colorBtn");
 
 button.addEventListener("click", () => {
-    const randomColor = getRandomColor();
-    document.body.style.backgroundColor = randomColor;
+  const randomColor = getRandomColor();
+  document.body.style.backgroundColor = randomColor;
 });
 
 function getRandomColor() {

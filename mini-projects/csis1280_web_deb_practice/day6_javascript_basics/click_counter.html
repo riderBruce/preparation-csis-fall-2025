@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Click Counter</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      button {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        margin-top: 20px;
+      }
+      #count {
+        font-size: 2rem;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Click Counter</h1>
+    <button id="count-btn">Click Me</button>
+    <p id="count">0</p>
+
+    <script>
+      // let count = 0;
+      // const button = document.getElementById('count-btn');
+      // const display = document.getElementById('count');
+
+      // button.addEventListener('click', () => {
+      //   count++;
+      //   display.textContent = count;
+      // });
+    </script>
+    <script>
+      // use closure for unuse global variables
+      const button = document.getElementById("count-btn");
+      const display = document.getElementById("count");
+
+      const counter = () => {
+        let count = 0;
+        return () => {
+          return ++count;
+        };
+      };
+
+      const countUp = counter();
+
+      button.addEventListener("click", () => {
+        display.textContent = countUp();
+      });
+    </script>
+  </body>
+</html>
