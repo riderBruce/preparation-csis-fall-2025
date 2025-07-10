@@ -21,12 +21,14 @@ function startTimer() {
   timer = setInterval(() => {
     time--;
     updateDisplay();
-    if (time === 0) {
-      clearInterval(timer);
-      statusText.textContent = "✅ Time's up! Take a break.";
-      isRunning = false;
-    }
+    if (time === 0) endTimer();
   }, 1000);
+}
+
+function endTimer() {
+  clearInterval(timer);
+  isRunning = false;
+  statusText.textContent = "Time's up! Take a break.";
 }
 
 function pauseTimer() {
