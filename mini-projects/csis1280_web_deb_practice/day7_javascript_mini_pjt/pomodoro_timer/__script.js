@@ -53,3 +53,44 @@ resetBtn.addEventListener("click", resetTimer);
 // Initialize display
 updateDisplay();
 statusText.textContent = "⏱ Ready to focus?";
+
+
+const importInput = document.getElementById("import-json");
+const importBtn = document.getElementById("import-btn");
+
+importBtn.addEventListener("click", () => {
+  importInput.click();
+})
+
+importInput.addEventListener("change", readJSONLogFile);
+
+function readJSONLogFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const loadedLogs = JSON.stringify(e.target.result);
+      if (!Array.isArray(loadedLogs)) throw new Error;
+      // update
+      logs = [...logs, ...loadedLogs];
+      localStorage.setItem("logs", JSON.stringify(logs));
+      loadedLogs.forEach((entry) => {
+        if (entry.type === "focus") {
+          sessionLog.focus += 1;
+        } else if (entry.type === "break") {
+          sessionLog.break += 1;
+        };
+      });
+      localStorage.setItem("focus", sessionLog.focus);
+      localStorage.setItem("break", sessionLog.break);
+      //refresh
+      viewSessionLog();
+      viewToHistory();
+  } catch (error) {
+    console.error("failed :", error);
+  };
+
+  reader.readAsText(file);
+  }
+}

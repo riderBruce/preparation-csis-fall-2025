@@ -6,6 +6,8 @@ const resetBtn = document.getElementById("reset");
 const breakModeBtn = document.getElementById("break-mode");
 const darkModeBtn = document.getElementById("dark-mode");
 
+const importInput = document.getElementById("import-json");
+const importBtn = document.getElementById("import-btn");
 const downloadBtn = document.getElementById("download-json");
 const clearLogsBtn = document.getElementById("clear-logs");
 
@@ -120,13 +122,12 @@ function logCounter() {
     sessionLog.break += 1;
     localStorage.setItem("break", sessionLog.break);
     logs.push({ type: "break", time: new Date().toISOString() });
-    localStorage.setItem("logs", JSON.stringify(logs));
   } else {
     sessionLog.focus += 1;
     localStorage.setItem("focus", sessionLog.focus);
     logs.push({ type: "focus", time: new Date().toISOString() });
-    localStorage.setItem("logs", JSON.stringify(logs));
   }
+  localStorage.setItem("logs", JSON.stringify(logs));
   viewToHistory();
 }
 
@@ -143,13 +144,58 @@ function viewToHistory() {
   }
 }
 
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    try {
+      const importedLogs = JSON.parse(e.target.result);
+      
+      // Validation
+      if (!Array.isArray(importedLogs)) {
+        throw new Error("Invalid JSON structure");
+      }
+
+      // Updates
+      importedLogs.forEach((entry) => {
+        if (entry.type === "focus") {
+          sessionLog.focus += 1;
+        } else if (entry.type === "break") {
+          sessionLog.break += 1;
+        }
+      });
+      localStorage.setItem("focus", sessionLog.focus);
+      localStorage.setItem("break", sessionLog.break);
+
+      logs = [...logs, ...importedLogs];
+      localStorage.setItem("logs", JSON.stringify(logs));
+
+      // Refreshes
+      viewSessionLog();
+      viewToHistory();
+
+      alert("✅ Logs imported successfully!");
+    } catch (error) {
+      console.error("Import failed:", error);
+      alert("❌ Failed to import logs.");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
 function downloadLogsAsJSON() {
   if (logs.length === 0) {
     alert("No logs to download.");
     return;
   }
 
-  const blob = new Blob([JSON.stringify(logs, null, 2)], {type: "application/json"});
+  const blob = new Blob([JSON.stringify(logs, null, 2)], {
+    type: "application/json",
+  });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
 
@@ -168,7 +214,6 @@ function clearLogs() {
   localStorage.removeItem("focus");
   localStorage.removeItem("break");
   localStorage.removeItem("logs");
-
   // Memory
   sessionLog = { focus: 0, break: 0 };
   logs = [];
@@ -183,6 +228,13 @@ pauseBtn.addEventListener("click", pauseTimer);
 resetBtn.addEventListener("click", resetTimer);
 breakModeBtn.addEventListener("click", switchTimer);
 darkModeBtn.addEventListener("click", setDarkMode);
+
+importInput.addEventListener("change", handleImport);
+
+importBtn.addEventListener("click", () => {
+  importInput.click(); // simulate click on the hidden file input
+});
+
 downloadBtn.addEventListener("click", downloadLogsAsJSON);
 clearLogsBtn.addEventListener("click", clearLogs);
 

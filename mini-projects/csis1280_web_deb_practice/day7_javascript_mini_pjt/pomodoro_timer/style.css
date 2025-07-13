@@ -89,8 +89,7 @@ h1 {
   border-radius: 4px;
 }
 
-#clear-logs,
-#download-json {
+#log-buttons button {
   background-color: #ff4d4d;
   color: white;
   border: none;
@@ -101,7 +100,6 @@ h1 {
   font-weight: bold;
 }
 
-#clear-logs:hover,
-#download-json:hover {
+#log-buttons button:hover {
   background-color: #ff0000;
 }
