@@ -35,8 +35,8 @@
 
 ## ▶️ Watch (Optional, 15–20 min)
 
-- [OS Scheduling Algorithms – Animated Tutorial](https://www.youtube.com/watch?v=kjKRrYhvgF4)
-- [GATE Smashers – CPU Scheduling with Gantt Charts](https://www.youtube.com/watch?v=yoDI_oABj1s)
+- [CPU Scheduling Basics](https://www.youtube.com/watch?v=Jkmy2YLUbUY)
+- [Shortest Job First Scheduling (Solved Problem 1)](https://www.youtube.com/watch?v=lpM14aWgl3Q)
 
 ## ✍️ Do
 
@@ -44,23 +44,146 @@
 
 - Draw a Gantt chart for each algorithm using the following sample:
 
-```text
-Process | Arrival Time | Burst Time
---------|--------------|---------
-   P1   |      0       |     5
-   P2   |      1       |     3
-   P3   |      2       |     1
-   P4   |      3       |     2
-```
+  1. FCFS
+
+     ```text
+     Process | Arrival| Burst | Turnaround | Waiting
+     --------|--------|-------|------------|---------
+     P1      |   0    |   5   | 5 - 0 = 5  | 5 - 5 = 0
+     P2      |   1    |   3   | 8 - 1 = 7  | 7 - 3 = 4
+     P3      |   2    |   1   | 9 - 2 = 7  | 7 - 1 = 6
+     P4      |   3    |   2   | 11 - 3 = 8 | 8 - 2 = 6
+
+     Gantt Chart
+     0 P1 5 P2 8 P3 9 P4 11
+     Average waiting time = ( 0 + 4 + 6 + 6 ) / 4 = 3.5
+     ```
+
+  2. SRTF - Shortest Remaining Time First, Preemptive SJF
+        - It’s definitely worth understanding, even if not common in Windows/Linux kernels.
+
+     ```text
+     Process | Arrival| Burst | Turnaround | Waiting
+     --------|--------|-------|------------|---------
+     P1      |   0    |   5   | 11 - 0 = 11| 11 - 5 = 6
+     P2      |   1    |   3   | 7 - 1 = 6  | 6 - 3 = 3
+     P3      |   2    |   1   | 3 - 2 = 1  | 1 - 1 = 0
+     P4      |   3    |   2   | 5 - 3 = 2  | 2 - 2 = 0
+
+     Gantt Chart
+     0 P1 1 P2 2 P3 3 P4 5 P2 7 P1 11
+     Average waiting time = ( 6 + 3 + 0 + 0 ) / 4 = 2.25
+     ```
+
+  3. SJF - Non-Preemptive
+
+     ```text
+     Process | Arrival| Burst | Turnaround | Waiting
+     --------|--------|-------|------------|---------
+     P1      |   0    |   5   | 5 - 0 = 5  | 5 - 5 = 0
+     P2      |   1    |   3   | 11 - 1 = 10| 10 - 3 = 7
+     P3      |   2    |   1   | 6 - 2 = 4  | 4 - 1 = 3
+     P4      |   3    |   2   | 8 - 3 = 5  | 5 - 2 = 3
+
+     Gantt Chart
+     0 P1 5 P3 6 P4 8 P2 11
+     Average waiting time = ( 0 + 7 + 3 + 3 ) / 4 = 3.25
+     ```
+
+  4. RR
+
+     ```text
+     Process | Arrival| Burst | Turnaround | Waiting
+     --------|--------|-------|------------|---------
+     P1      |   0    |   5   | 11 - 0 = 11| 11 - 5 = 6
+     P2      |   1    |   3   | 10 - 1 = 9 | 9 - 3 = 6
+     P3      |   2    |   1   | 5 - 2 = 3  | 3 - 1 = 2
+     P4      |   3    |   2   | 7 - 3 = 4  | 4 - 2 = 2
+
+     Gantt Chart
+     0 P1 2 P2 4 P3 5 P4 7 P1 9 P2 10 P1 11
+     Average waiting time = ( 6 + 6 + 2 + 2 ) / 4 = 4
+     ```
 
 - Try FCFS, SJF (non-preemptive), and Round Robin (quantum = 2).
 - Calculate:
-- Turnaround Time = Completion Time – Arrival Time
-- Waiting Time = Turnaround Time – Burst Time
+  - Turnaround Time = Completion Time – Arrival Time
+  - Waiting Time = Turnaround Time – Burst Time
 
 ### 🔧 2. Spreadsheet or Code Simulation (Optional)
 
 - Use Excel, Google Sheets, or a Python/JavaScript snippet to simulate Round Robin logic.
+
+    ```python
+    
+    def main():
+        # constants
+        burst_times = [5, 3, 1, 2]
+        bursts = [5, 3, 1, 2]
+        arrival_times = [0, 1, 2, 3]
+        completion_times = [0, 0, 0, 0]
+        turnaround_times = [0, 0, 0, 0]
+        waiting_times = [0, 0, 0, 0]
+        quantum = 2
+        # variables
+        time = 0
+        results = []
+
+        def is_arrived(idx: int) -> bool:
+            return time >= arrival_times[idx]
+
+        while True:
+            if all(burst == 0 for burst in bursts):
+                results.append((time, "finished"))
+                break
+            for i, burst in enumerate(bursts):
+                if not is_arrived(i):
+                    continue
+                if burst == 0:
+                    continue
+                label = f"P{i + 1}"
+                results.append((time, label))
+                if burst > quantum:
+                    bursts[i] -= quantum
+                    time += quantum
+                elif burst < quantum:
+                    bursts[i] = 0
+                    time += burst
+                    completion_times[i] = time
+                elif burst == quantum:
+                    bursts[i] -= quantum
+                    time += quantum
+                    completion_times[i] = time
+                else:
+                    print("error")
+                    break
+
+        for t, label in results:
+            print(f"{t}  {label}  ", end='')
+        print("\n")
+
+        for i, completion_time in enumerate(completion_times):
+            print(f"P{i + 1}  {completion_time}  ", end='')
+        print("\n")
+
+        for i in range(0, len(arrival_times)):
+            turnaround_times[i] = completion_times[i] - arrival_times[i]
+            waiting_times[i] = turnaround_times[i] - burst_times[i]
+
+        for i, turnaround_time in enumerate(turnaround_times):
+            print(f"P{i + 1}  {turnaround_time}  ", end='')
+        print(f"Average : {sum(turnaround_times) / len(turnaround_times)}")
+        print("\n")
+
+        for i, waiting_time in enumerate(waiting_times):
+            print(f"P{i + 1}  {waiting_time}  ", end='')
+        print(f"Average : {sum(waiting_times) / len(waiting_times)}")
+        print("\n")
+
+
+    if __name__ == '__main__':
+        main()
+    ```
 
 ## ✅ Checkpoint
 
