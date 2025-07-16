@@ -99,11 +99,11 @@
      P1      |   0    |   5   | 11 - 0 = 11| 11 - 5 = 6
      P2      |   1    |   3   | 10 - 1 = 9 | 9 - 3 = 6
      P3      |   2    |   1   | 5 - 2 = 3  | 3 - 1 = 2
-     P4      |   3    |   2   | 7 - 3 = 4  | 4 - 2 = 2
+     P4      |   3    |   2   | 9 - 3 = 6  | 6 - 2 = 4
 
      Gantt Chart
-     0 P1 2 P2 4 P3 5 P4 7 P1 9 P2 10 P1 11
-     Average waiting time = ( 6 + 6 + 2 + 2 ) / 4 = 4
+     0 P1 2 P2 4 P3 5 P1 7 P4 9 P2 10 P1 11
+     Average waiting time = ( 6 + 6 + 2 + 4 ) / 4 = 4.5
      ```
 
 - Try FCFS, SJF (non-preemptive), and Round Robin (quantum = 2).
@@ -115,38 +115,68 @@
 
 - Use Excel, Google Sheets, or a Python/JavaScript snippet to simulate Round Robin logic.
 - [Practice it with function](../mini-projects/csis2260_operating_system/simulate_Round_Robin/simulate_round_robin.py)
-- [Practice it with function](../mini-projects/csis2260_operating_system/simulate_Round_Robin/simulate_rr_class.py)
+- [Practice it with Class](../mini-projects/csis2260_operating_system/simulate_Round_Robin/simulate_rr_class_practice.py)
 
-  ```python
-  def is_arrived(idx: int) -> bool:
-      return time >= arrival_times[idx]
+```python
+class Process:
+    def __init__(self, pid, arrival_time, burst):
+        self.pid = pid
+        self.arrival_time = arrival_time
+        self.burst = burst
+        self.remaining_time = burst
+        self.is_visited = False
+        self.completion_time = 0
+        self.turnaround_time = 0
+        self.waiting_time = 0
 
-  while True:
-      if all(burst == 0 for burst in bursts):
-          results.append((time, "finished"))
-          break
-      for i, burst in enumerate(bursts):
-          if not is_arrived(i):
-              continue
-          if burst == 0:
-              continue
-          label = f"P{i + 1}"
-          results.append((time, label))
-          if burst > quantum:
-              bursts[i] -= quantum
-              time += quantum
-          elif burst < quantum:
-              bursts[i] = 0
-              time += burst
-              completion_times[i] = time
-          elif burst == quantum:
-              bursts[i] -= quantum
-              time += quantum
-              completion_times[i] = time
-          else:
-              print("error")
-              break
-  ```
+
+class RoundRobinScheduler:
+    def __init__(self, processes, quantum):
+        self.processes = processes
+        self.quantum = quantum
+        self.time = 0
+        self.queue = []
+        self.gantt_chart = []
+
+    def is_finished(self):
+        return all(p.remaining_time == 0 for p in self.processes)
+
+    def is_newly_arrived(self, p):
+        return not p.is_visited and p.arrival_time <= self.time
+
+    def enqueue_arrived_processes(self):
+        for process in self.processes:
+            if self.is_newly_arrived(process):
+                self.queue.append(process)
+                process.is_visited = True
+
+    def run(self) -> None:
+        while not self.is_finished():
+            # enqueue
+            self.enqueue_arrived_processes()
+            # wait
+            if not self.queue:
+                self.time += 1
+                continue
+            # pop first queue
+            current = self.queue.pop(0)
+            # CPU running
+            self.gantt_chart.append((self.time, current.pid))
+            # Update
+            if current.remaining_time > self.quantum:
+                self.time += self.quantum
+                current.remaining_time -= self.quantum
+            else:
+                self.time += current.remaining_time
+                current.remaining_time = 0
+                current.completion_time = self.time
+            # Refresh : enqueue current process after new arrival
+            self.enqueue_arrived_processes()
+            if current.remaining_time > 0:
+                self.queue.append(current)
+        # wrap up
+        self.gantt_chart.append((self.time, "Finished"))
+```
 
 ## ✅ Checkpoint
 
