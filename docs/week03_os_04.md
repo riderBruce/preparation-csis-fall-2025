@@ -4,8 +4,6 @@
 
 Understand how memory is organized, allocated, and managed in an operating system, including concepts like paging, segmentation, and virtual memory.
 
----
-
 ## 🧠 Key Concepts
 
 ### 1. RAM & Memory Hierarchy
@@ -18,8 +16,6 @@ Understand how memory is organized, allocated, and managed in an operating syste
 
 - **Contiguous Allocation**: entire memory block is assigned (simple but causes fragmentation)
 - **Non-Contiguous Allocation**: memory is split and used more efficiently
-
----
 
 ### 3. Paging
 
@@ -34,15 +30,11 @@ Understand how memory is organized, allocated, and managed in an operating syste
 - Memory is divided based on **logical segments** like code, stack, heap.
 - More flexible than paging but vulnerable to external fragmentation.
 
----
-
 ### 5. Virtual Memory
 
 - Uses **disk** space to simulate more RAM.
 - Enables **more processes** to run than physical memory allows.
 - Implements **paging** with a page table and **swap space**.
-
----
 
 ## 🧪 Practice Activity: Simulate Paging
 
@@ -69,6 +61,7 @@ for process, frames in page_table.items():
 ## 📺 Suggested Video
 
 - Memory Management in Operating System (easy explanation with visuals)
+- [Memory & Storage: Crash Course Computer Science #19](https://www.youtube.com/watch?v=TQCr9RV7twk&list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo&index=20)
 
 ## 🗂️ Optional Reading
 
@@ -85,5 +78,5 @@ for process, frames in page_table.items():
 
 ## ✍️ Journal Prompt
 
-Explain paging and segmentation in your own words with examples.
-What’s the difference between virtual memory and RAM?
+- Explain paging and segmentation in your own words with examples.
+- What’s the difference between virtual memory and RAM?
