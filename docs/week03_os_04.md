@@ -60,7 +60,6 @@ for process, frames in page_table.items():
 
 ## 📺 Suggested Video
 
-- Memory Management in Operating System (easy explanation with visuals)
 - [Memory & Storage: Crash Course Computer Science #19](https://www.youtube.com/watch?v=TQCr9RV7twk&list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo&index=20)
 
 ## 🗂️ Optional Reading
