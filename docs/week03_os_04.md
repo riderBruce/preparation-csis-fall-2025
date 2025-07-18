@@ -52,11 +52,11 @@ for process, frames in page_table.items():
     print(f"{process}: {frames}")
 ```
 
-### Try adding a small simulation like:
+### [Memory simulation with Classes : So cool!](../mini-projects/csis2260_operating_system/simulate_paging/memory_simulation.py)
 
 - Allocate processes to frames
 - Print out how memory frames are assigned
-- Add swap logic if memory is full (optional)
+- Add swap logic if memory is full
 
 ## 📺 Suggested Video
 
@@ -64,7 +64,7 @@ for process, frames in page_table.items():
 
 ## 🗂️ Optional Reading
 
-- CrashCourse OS Ep. 5: Memory & Virtual Memory
+- [Operating Systems Crash Course: Cover 20+ Concepts in 12 MINS!](https://www.youtube.com/watch?v=4LWcuw02bRI)
 - Nand2Tetris Chapter: Memory Segments and RAM Logic
 
 ## 📌 Key Terms to Review
