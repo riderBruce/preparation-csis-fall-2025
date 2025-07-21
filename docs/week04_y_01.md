@@ -14,6 +14,8 @@
 
 An **Information System** is a system of components that work together to collect, process, store, and distribute information to support decision making, coordination, control, and analysis in an organization.
 
+- Techenology + Business + Data + Soft skill
+
 > 📌 It includes both **technology** and **people**.
 
 ## ⚙️ The 5 Major Components of IS
@@ -45,25 +47,25 @@ An **Information System** is a system of components that work together to collec
 
 ## 🔍 Data vs. Information
 
+Information - It is a collection of data organized and processed so that it has additional value beyond the value of the individual facts.
+
 | Concept  | Example             | Meaning                            |
 | -------- | ------------------- | ---------------------------------- |
 | **Data** | "4.5", "John Smith" | Unprocessed raw facts              |
 | **Info** | "Avg score: 4.5"    | Data processed into useful meaning |
 
+## ✏️ Characteristics of Quality Informations
+
+Accessible, Accurate, Complete, Economical, Flexible, Relevant, Reliable, Secure, Simple, Timely, Verificable
+
 ## 🎥 Recommended YouTube Videos for Beginners
 
-1. **What is an Information System?** – by TechnologyAdvice  
-   🔗 https://www.youtube.com/watch?v=H1fBqHogDrw
+1. [Computer Information Systems (CIS) Explained in 5 Minutes](https://www.youtube.com/watch?v=WXy3VSD-npM)
 
-2. **Introduction to Information Systems** – by Simplilearn  
-   🔗 https://www.youtube.com/watch?v=ZgP8A5zDtJ0
+2. [Information Systems What is it? What does it mean?](https://www.youtube.com/watch?v=dLfpZtIacbc)
 
-3. **Components of an Information System** – by Prof. Messer  
-   🔗 https://www.youtube.com/watch?v=37fqyYfuhv0
+3. [Introduction to Information Systems](https://www.youtube.com/watch?v=g8059-8QDNk) 
 
-4. **IS vs. IT** (Difference between Information System & Technology)  
-   🔗 https://www.youtube.com/watch?v=1iH2CkoQ1N8
+4. [The 5 Components of an Information System](https://www.youtube.com/watch?v=XlcolUHMnh0&t=20s)
 
-## ✅ Next Step
-
-Would you like a practice journal entry for today or a quick quiz to reinforce these ideas?
+5. [Computer Science vs Information Technology vs Information Systems](https://www.youtube.com/watch?v=guNcxwz_O2g)
