@@ -1,13 +1,13 @@
 # ✅ Day 6 Mission: File I/O in Python (OS-flavored)
 
 You’ll practice how files are:
+
 - Opened, read, written
 - Simulated like a mini file system (very simplified)
 - Interacted with through code like an operating system might
 
-
-
 ## 📦 Practice 1 – Basic File Read/Write
+
 ```python
 def write_to_file(filename, data):
     with open(filename, 'w') as f:
@@ -19,7 +19,7 @@ def read_from_file(filename):
         content = f.read()
     print(f"📄 Content of {filename}:")
     print(content)
-    
+
 def main():
     content = "Hello, this is a simulated log entry.\nLet's learn File I/O!"
     write_to_file("log.txt", content)
@@ -30,6 +30,7 @@ if __name__ == '__main__':
 ```
 
 ## 💡 Practice 2 – Append + Simulate OS log file
+
 ```python
 def append_to_log(filename, process_id, action):
     with open(filename, 'a') as f:
@@ -43,6 +44,7 @@ append_to_log("os_log.txt", 3, "Completed execution")
 ## 🧠 Practice 3 – Load process from CSV
 
 Let’s say we have a file like processes.csv:
+
 ```python
 import csv
 
