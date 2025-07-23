@@ -1,6 +1,15 @@
-## CSIS 2200 - Week 04 Day 4
+# CSIS 2200 - Week 04 Day 4
 
-### Topic: Types of Information Systems
+## Topic: Types of Information Systems
+
+### ✏️ Youtube Videos
+
+- [Types of Information Systems (TPS, MIS, and DSS)](https://www.youtube.com/watch?v=nQ4Q3iN7TMM)
+- [Types of Information Systems](https://www.youtube.com/watch?v=5hMhvDG35eA)
+
+  - TPS : Transaction Processing System
+  - MIS : Management Information System
+  - DSS : Decision Supporting System
 
 ### 🧠 Core Concepts to Learn Today
 
@@ -29,12 +38,6 @@
 | Functional    | HR System, Finance App | Support a specific business function    |
 | Enterprise    | ERP, CRM               | Integrate functions across organization |
 
-### 💡 Real-World Reflection Prompts
-
-1. Have you ever interacted with a POS system or self-checkout machine?
-2. Think about your previous job—did your department use any software tools to manage records?
-3. What do you think are the benefits and risks of using one large enterprise system vs multiple small functional systems?
-
 ### 💻 Optional Coding Exercise
 
 Since you miss pseudocode and coding practice, here’s a challenge:
@@ -54,11 +57,3 @@ END
 ```
 
 Want to convert this into Python or JavaScript later?
-
-### 🎯 Quick Quiz (for review)
-
-1. What is the main goal of a transactional system?
-2. Why might a company choose to implement an ERP system?
-3. What could go wrong if departmental systems aren't integrated?
-
-Let me know if you want to go deeper into ERP/CRM, or write some code examples based on today’s theory!
