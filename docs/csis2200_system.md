@@ -52,9 +52,9 @@ Final Examination- 25% - 40%
 
 Total 100%
 
-*In order to pass the course, students must, in addition to receiving an overall course grade of 50%, also achieve a grade of at least 50% on the combined weighted examination components (including quizzes, tests, exams).
+> *In order to pass the course, students must, in addition to receiving an overall course grade of 50%, also achieve a grade of at least 50% on the combined weighted examination components (including quizzes, tests, exams).
 
-Students may conduct research as part of their coursework in this class. Instructors for the course are responsible for ensuring that student research projects comply with College policies on ethical conduct for research involving humans, which can require obtaining Informed Consent from participants and getting the approval of the Douglas College Research Ethics Board prior to conducting the research.
+> Students may conduct research as part of their coursework in this class. Instructors for the course are responsible for ensuring that student research projects comply with College policies on ethical conduct for research involving humans, which can require obtaining Informed Consent from participants and getting the approval of the Douglas College Research Ethics Board prior to conducting the research.
 
 ## Learning outcomes
 
