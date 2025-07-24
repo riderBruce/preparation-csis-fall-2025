@@ -53,8 +53,16 @@ console.log(getOrdersByCustomer(customer.id));
 ### 💬 Reflection Questions
 
 1. Can you think of a real-world example where systems components (like people and software) worked together effectively?
+
+- In combinient stores, customer can pay after scanning a barcord, then the payment system reads credit card for payment. Customer, scanner, and the system works together.
+
 2. Have you ever seen an ER diagram before? Where or how?
+
+- When I builded up a database, it was hard to know which property has to be a pk. I could see the theory about ERD at that time.
+
 3. Why is it important to model data before building a system?
+
+- It's a blueprint of database that store and retrive data. If the modeling is not fixed or modified, all system's outline should be fixed.
 
 ### 📝 Mini Exercise
 
@@ -63,3 +71,4 @@ Draw a simple ERD (on paper or tool) for a Library System:
 - Entities: Book, Member, Loan
 - Attributes: (e.g., Book → title, author)
 - Relationships: A Member borrows a Book
+
