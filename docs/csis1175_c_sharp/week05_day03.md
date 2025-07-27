@@ -100,7 +100,17 @@ case "6":
 
 ## ✍️ Journal Prompt
 
-> What challenges did you face while reading or writing files? Did you notice any difference between `txt` and `csv` formatting? How might this persistence layer change if the data was stored in a database?
+- What challenges did you face while reading or writing files?
+
+>
+
+- Did you notice any difference between `txt` and `csv` formatting?
+
+>
+
+- How might this persistence layer change if the data was stored in a database?
+
+>
 
 ---
 
@@ -132,4 +142,3 @@ Why did the student get stuck in a text file?
 ## 🎉 You did it!
 
 You’re now persisting data like a real app. Next up — inheritance & polymorphism… but first, make sure your students are safe in a file! 🗂️📄
-

@@ -27,7 +27,7 @@ namespace StudentManagerBranch
         }
         public string GetDetails()
         {
-            return $"Name: {Name}, Age: {Age}, Major: {Major}";
+            return $"Name: {Name} | Age: {Age} | Major: {Major}";
         }
     }
 }

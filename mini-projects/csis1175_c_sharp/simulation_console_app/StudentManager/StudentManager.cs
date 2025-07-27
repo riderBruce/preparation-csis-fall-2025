@@ -42,5 +42,54 @@ namespace StudentManagerBranch
                 Console.WriteLine(student.GetDetails());
             }
         }
+        public void SaveToFile(string filePath = "students.txt")
+        {
+            try
+            {
+                using (StreamWriter writer = new(filePath))
+                {
+                    foreach (var student in students)
+                    {
+                        writer.WriteLine(student.GetDetails());
+                    }
+                    Console.WriteLine($"Students saved to {filePath} successfully.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while saving to file: {ex.Message}");
+            }
+        }
+        public void LoadFromFile(string filePath = "students.txt")
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"File '{filePath}' does not exist.");
+                    return;
+                }
+
+                students.Clear();
+                foreach (string line in File.ReadAllLines(filePath))
+                {
+                    var parts = line.Split('|');
+                    if (parts.Length != 3) {
+                        Console.WriteLine($"Invalid line format: {line}");
+                        continue;
+                    }
+                    string name = parts[0].Trim();
+                    int age = int.TryParse(parts[1].Trim(), out int parsedAge) ? parsedAge : 0;
+                    string major = parts[2].Trim();
+                    students.Add(new Student(name, age, major));
+                }
+                Console.WriteLine($"File '{filePath}' successfully loaded.");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while loading from file: {ex.Message}");
+            }
+        }
     }
 }

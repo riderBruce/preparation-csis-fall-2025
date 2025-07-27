@@ -13,7 +13,9 @@ public class Program
             Console.WriteLine("2. Add a student with a name, an age, and a major.");
             Console.WriteLine("3. List all students.");
             Console.WriteLine("4. Search for a student by name.");
-            Console.WriteLine("5. Exit.");
+            Console.WriteLine("5. Save students to file.");
+            Console.WriteLine("6. Load students from file.");
+            Console.WriteLine("7. Exit.");
             Console.Write("Choose an option: ");
 
             string choice = Console.ReadLine();
@@ -46,6 +48,26 @@ public class Program
                     break;
 
                 case "5":
+                    Console.Write("Enter the file path to save students (default: students.txt): ");
+                    string filePathSave = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(filePathSave))
+                    {
+                        filePathSave = "students.txt";
+                    }
+                    manager.SaveToFile(filePathSave);
+                    break;
+
+                case "6":
+                    Console.Write("Enter the file path to load students (default: students.txt): ");
+                    string filePathLoad = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(filePathLoad))
+                    {
+                        filePathLoad = "students.txt";
+                    }
+                    manager.LoadFromFile(filePathLoad);
+                    break;
+
+                case "7":
                     Console.WriteLine("Exiting the program.");
                     return;
 
