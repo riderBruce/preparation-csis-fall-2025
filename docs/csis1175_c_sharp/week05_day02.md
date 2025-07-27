@@ -46,13 +46,11 @@ public class Student
 }
 ```
 
-2. Create a StudentManager Class
+### 2. Create a StudentManager Class
 
-   Add Student
-
-   List All Students
-
-   Search Students by Name
+- Add Student
+- List All Students
+- Search Students by Name
 
 ```csharp
 public class StudentManager
@@ -102,7 +100,7 @@ public class StudentManager
 
 ```
 
-3. Update Program.cs to Use It All
+### 3. Update Program.cs to Use It All
 
 ```csharp
 class Program
@@ -163,34 +161,34 @@ class Program
 
 ```
 
-🔧 Tools
+## 🔧 Tools
 
-    Visual Studio or VS Code
+- Visual Studio or VS Code
+- .NET 6 or higher
+- System.Linq
 
-    .NET 6 or higher
+## 📘 Deliverables
 
-    System.Linq
+- Student.cs
+- StudentManager.cs
+- Program.cs
+- Daily journal/reflection
+- GitHub commit after testing
 
-📘 Deliverables
+## 🧠 Reflection Prompts (For Later)
 
-    Student.cs
+- What advantages did constructor overloading give you here?
 
-    StudentManager.cs
+> The Constructor overloading means that create multiple constructors with the same name but different parameters. It allows for more flexable way that same class can be used with different input. I could create Student instance only with a name easily not with full detailed parameter. It save me time to input many student quickly.
 
-    Program.cs
+- How did separating logic into StudentManager help your code structure?
 
-    Daily journal/reflection
+> Seperating logic help the code clean and reusable because it is easy to refactor, remove redundant code and turn it into a reusable method if process handling methods are getting together in on place.
 
-    GitHub commit after testing
+- Could this be extended into a GUI or database app?
 
-🧠 Reflection Prompts (For Later)
+> We already seperate main logic, operation class and data class. We can turn Student.cs to database, Program.cs to GUI page, and StudentManager to operation logic. I finally know that seperate logic make it easier to expansion and transformation.
 
-    What advantages did constructor overloading give you here?
+## 🧪 Git Commit Message
 
-    How did separating logic into StudentManager help your code structure?
-
-    Could this be extended into a GUI or database app?
-
-🧪 Git Commit Message
-
-git commit -m "🎓 Add Student Manager console app with constructor overloading and search"
+- git commit -m "🎓 Add Student Manager console app with constructor overloading and search"
