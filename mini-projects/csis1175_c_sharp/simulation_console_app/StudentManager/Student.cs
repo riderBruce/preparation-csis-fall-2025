@@ -11,6 +11,8 @@ namespace StudentManagerBranch
         public string Name { get; set; }
         public int Age { get; set; }
         public string Major { get; set; }
+
+        public Student() { }
         public Student(string name)
         {
             Name = name;
@@ -21,13 +23,13 @@ namespace StudentManagerBranch
             Age = age;
             Major = major;
         }
-        public void ShowDetails()
-        {
-            Console.WriteLine($"Name: {Name}, Age: {Age}, Major: {Major}");
-        }
         public string GetDetails()
         {
             return $"Name: {Name} | Age: {Age} | Major: {Major}";
+        }
+        public string GetDetails(char divider)
+        {
+            return $"{Name}{divider}{Age}{divider}{Major}";
         }
     }
 }
