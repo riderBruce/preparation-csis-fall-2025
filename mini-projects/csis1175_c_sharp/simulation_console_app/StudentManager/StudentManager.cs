@@ -44,164 +44,132 @@ namespace StudentManagerBranch
                 Console.WriteLine(student.GetDetails());
             }
         }
-        public void SaveToTxtFile(string filePath = "students.txt", char divider = '|')
+        public void SaveStudents(FileType fileType, string filePath = "")
         {
             if (string.IsNullOrWhiteSpace(filePath))
-            {
-                filePath = "students.txt";
-            }
-            if (File.Exists(filePath))
-            {
-                Console.WriteLine($"File '{filePath}' already exists. It will be overwritten.");
-            }
-            if (students == null || students.Count == 0)
-            {
-                Console.WriteLine("No students to save.");
-                return;
-            }
+                filePath = GetDefaultPath(fileType);
+
+            if (!ValidateSaveConditions(filePath)) return;
 
             try
             {
-                using StreamWriter writer = new(filePath);
-                foreach (var student in students)
+                switch (fileType)
                 {
-                    writer.WriteLine(student.GetDetails(divider));
+                    case FileType.Txt:
+                        SaveToFile(filePath, '|');
+                        break;
+                    case FileType.Csv:
+                        SaveToFile(filePath, ',');
+                        break;
+                    case FileType.Json:
+                        SaveToJson(filePath);
+                        break;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred while saving to file: {ex.Message}");
+                Console.WriteLine($"Error saving file: {ex.Message}");
             }
-            Console.WriteLine($"Students saved to {filePath} successfully.");
+            Console.WriteLine($"Students saved to {filePath}");
         }
-        public void LoadFromTxtFile(string filePath = "students.txt", char divider = '|')
+        public void LoadStudents(FileType fileType, string filePath = "")
         {
             if (string.IsNullOrWhiteSpace(filePath))
-            {
-                filePath = "students.txt";
-            }
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine($"File '{filePath}' does not exist.");
-                return;
-            }
-            students.Clear();
-            try
-            {
-                foreach (string line in File.ReadAllLines(filePath))
-                {
-                    var parts = line.Split(divider);
-                    if (parts.Length != 3)
-                    {
-                        Console.WriteLine($"Invalid line format: {line}");
-                        continue;
-                    }
-                    string name = parts[0].Trim();
-                    int age = int.TryParse(parts[1].Trim(), out int parsedAge) ? parsedAge : 0;
-                    string major = parts[2].Trim();
-                    students.Add(new Student(name, age, major));
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while loading from file: {ex.Message}");
-            }
-            Console.WriteLine($"File '{filePath}' successfully loaded.");
-        }
-        public void SaveToCsvFile(string filePath = "students.csv", char divider = ',')
-        {
-            if (string.IsNullOrWhiteSpace(filePath))
-            {
-                filePath = "students.csv";
-            }
-            if (File.Exists(filePath))
-            {
-                Console.WriteLine($"File '{filePath}' already exists. It will be overwritten.");
-            }
-            if (students == null || students.Count == 0)
-            {
-                Console.WriteLine("No students to save.");
-                return;
-            }
+                filePath = GetDefaultPath(fileType);
+
+            if (!ValidateLoadConditions(filePath)) return;
 
             try
             {
-                using StreamWriter writer = new(filePath);
-                writer.WriteLine($"Name{divider}Age{divider}Major");
-                foreach (var student in students)
+                switch (fileType)
                 {
-                    writer.WriteLine(student.GetDetails(divider));
+                    case FileType.Txt:
+                        LoadFromFile(filePath, '|');
+                        break;
+                    case FileType.Csv:
+                        LoadFromFile(filePath, ',');
+                        break;
+                    case FileType.Json:
+                        LoadFromJson(filePath);
+                        break;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred while saving to file: {ex.Message}");
+                Console.WriteLine($"Error loading file: {ex.Message}");
             }
-            Console.WriteLine($"Students saved to {filePath} successfully.");
+            Console.WriteLine($"Students loaded from {filePath}");
         }
-        public void LoadFromCsvFile(string filePath = "students.csv", char divider = ',')
+        private bool ValidateSaveConditions(string filePath)
         {
-            if (string.IsNullOrWhiteSpace(filePath)) {
-                filePath = "students.csv";
+            if (students == null || students.Count == 0)
+            {
+                Console.WriteLine("No students to save.");
+                return false;
             }
+            if (File.Exists(filePath))
+            {
+                Console.WriteLine($"File '{filePath}' will be overwritten.");
+            }
+            return true;
+        }
+        private bool ValidateLoadConditions(string filePath)
+        {
             if (!File.Exists(filePath))
             {
-                Console.WriteLine($"File '{filePath}' does not exist.");
-                return;
+                Console.WriteLine($"File '{filePath}' not found.");
+                return false;
             }
+            return true;
+        }
+        private string GetDefaultPath(FileType fileType) => fileType switch
+        {
+            FileType.Txt => "students.txt",
+            FileType.Csv => "students.csv",
+            FileType.Json => "students.json",
+            _ => "students.txt",
+        };
+        private void SaveToFile(string filePath, char divider)
+        {
+            using StreamWriter writer = new(filePath);
+            foreach (var student in students)
+            {
+                writer.WriteLine(student.GetDetails(divider));
+            }
+        }
+        private void LoadFromFile(string filePath, char divider)
+        {
             students.Clear();
-            try
+            foreach (string line in File.ReadAllLines(filePath))
             {
-                foreach (string line in File.ReadAllLines(filePath).Skip(1))
+                var parts = line.Split(divider);
+                if (parts.Length != 3)
                 {
-                    var parts = line.Split(divider);
-                    if (parts.Length != 3)
-                    {
-                        Console.WriteLine($"Invalid line format: {line}");
-                        continue;
-                    }
-                    string name = parts[0].Trim();
-                    int age = int.TryParse(parts[1].Trim(), out int parsedAge) ? parsedAge : 0;
-                    string major = parts[2].Trim();
-                    students.Add(new Student(name, age, major));
+                    Console.WriteLine($"Invalid line format: {line}");
+                    continue;
                 }
+                if (parts[0] == "Name" && parts[1] == "Age" && parts[2] == "Major") continue;
+                
+                students.Add(new Student(parts[0].Trim(),
+                                         int.TryParse(parts[1].Trim(), out int parsedAge) ? parsedAge : 0,
+                                         parts[2].Trim()));
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while loading from file: {ex.Message}");
-            }
-            Console.WriteLine($"Students loaded from {filePath} successfully.");
         }
-        public void ExportToJson(string filePath = "students.json")
+        private void SaveToJson(string filePath)
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(students, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while exporting to JSON: {ex.Message}");
-            }
-            Console.WriteLine($"Students exported to {filePath} successfully.");
+            string json = JsonSerializer.Serialize(students, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
         }
-        public void ImportFromJson(string filePath = "students.json")
+        private void LoadFromJson(string filePath)
         {
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine($"File '{filePath}' does not exist.");
-                return;
-            }
-            try
-            {
-                string json = File.ReadAllText(filePath);
-                students = JsonSerializer.Deserialize<List<Student>>(json) ?? new List<Student>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while importing from JSON: {ex.Message}");
-            }
-            Console.WriteLine($"File '{filePath}' successfully imported.");
-        }        
+            string json = File.ReadAllText(filePath);
+            students = JsonSerializer.Deserialize<List<Student>>(json) ?? new List<Student>();
+        }
+    }
+    public enum FileType
+    {
+        Txt,
+        Csv,
+        Json,
     }
 }

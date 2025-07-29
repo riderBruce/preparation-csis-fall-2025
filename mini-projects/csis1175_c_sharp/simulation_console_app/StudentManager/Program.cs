@@ -7,23 +7,23 @@ public class Program
 
         while (true)
         {
-            Console.WriteLine($"\n{new string('-', 20)}");
+            Console.WriteLine($"\n{new string('-', 40)}");
             Console.WriteLine("Welcome to the Student Manager!");
-            manager.ImportFromJson("students.json");
+            if (manager.StudentsCount == 0)
+            {
+                manager.LoadStudents(FileType.Txt);
+            }
             Console.WriteLine($"Current number of students: {manager.StudentsCount}");
-            Console.WriteLine(new string('-', 20));
+            Console.WriteLine(new string('-', 40));
             Console.WriteLine("Student Manager Menu:");
             Console.WriteLine("1. Add a student just with a name.");
             Console.WriteLine("2. Add a student with a name, an age, and a major.");
             Console.WriteLine("3. List all students.");
             Console.WriteLine("4. Search for a student by name.");
-            Console.WriteLine("5. Save students to txt file.");
-            Console.WriteLine("6. Load students from txt file.");
-            Console.WriteLine("7. Save students to csv file.");
-            Console.WriteLine("8. Load students from csv file.");
-            Console.WriteLine("9. Save students to json file.");
-            Console.WriteLine("10. Load students from json file.");
-            Console.WriteLine("11. Exit.");
+            Console.WriteLine("5. Save students to file.");
+            Console.WriteLine("6. Load students to file.");
+            Console.WriteLine("7. Exit.");
+            Console.WriteLine(new string('-', 40)); 
             Console.Write("Choose an option: ");
 
 
@@ -66,62 +66,35 @@ public class Program
 
                 case "5":
                     {
-                        string prompt = "Enter the file path to save students (default: students.txt): ";
-                        string defaultValue = "students.txt";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.SaveToTxtFile(filePath);
+                        Console.Write("Choose file type to save (txt/csv/json): ");
+                        string input = Console.ReadLine();
+                        if (Enum.TryParse<FileType>(input, true, out FileType fileType))
+                        {
+                            manager.SaveStudents(fileType);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid file type. Please enter 'txt', 'csv', or 'json'.");
+                        }
                         break;
                     }
 
                 case "6":
                     {
-                        string prompt = "Enter the file path to load students (default: students.txt): ";
-                        string defaultValue = "students.txt";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.LoadFromTxtFile(filePath);
+                        Console.Write("Choose file type to load (txt/csv/json): ");
+                        string input = Console.ReadLine();
+                        if (Enum.TryParse<FileType>(input, true, out FileType fileType))
+                        {
+                            manager.LoadStudents(fileType);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid file type. Please enter 'txt', 'csv', or 'json'.");
+                        }
                         break;
                     }
-
 
                 case "7":
-                    {
-                        string prompt = "Enter the file path to save students (default: students.csv): ";
-                        string defaultValue = "students.csv";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.SaveToCsvFile(filePath);
-                        break;
-                    }
-
-
-                case "8":
-                    {
-                        string prompt = "Enter the file path to load students (default: students.csv): ";
-                        string defaultValue = "students.csv";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.LoadFromCsvFile(filePath);
-                        break;
-                    }
-
-
-                case "9":
-                    {
-                        string prompt = "Enter the file path to save students (default: students.json): ";
-                        string defaultValue = "students.json";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.ExportToJson(filePath);
-                        break;
-                    }
-
-
-                case "10":
-                    {
-                        string prompt = "Enter the file path to load students (default: students.json): ";
-                        string defaultValue = "students.json";
-                        string filePath = ReadOrDefault(prompt, defaultValue);
-                        manager.ImportFromJson(filePath);
-                        break;
-                    }
-                case "11":
                     {
                         Console.WriteLine("Exiting the program.");
                         return;
