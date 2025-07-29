@@ -11,19 +11,56 @@ namespace StudentManagerBranch
     {
         List<Student> students = new();
         public int StudentsCount => students.Count;
+        private List<string> Majors => students.Select(s => s.Major).Distinct().ToList();
+        private string MajorsString => string.Join(", ", Majors);
+        private Dictionary<string, int> MajorsCount 
+            => Majors.ToDictionary(majors => majors,
+                                    majors => students.Count(s => s.Major.Equals(majors, StringComparison.OrdinalIgnoreCase)));
+        private string MajorsCountString
+            => string.Join(", ", MajorsCount.Select(KeyValuePair => $"{KeyValuePair.Key}: {KeyValuePair.Value}"));
+
         public void AddStudent(Student student)
         {
             students.Add(student);
             Console.WriteLine("Student added successfully.");
         }
+        private void DisplayStudentSummary()
+        {
+            Console.WriteLine($"Total students: {StudentsCount}");
+            Console.WriteLine($"Majors: {MajorsString}");
+            Console.WriteLine($"Majors count: {MajorsCountString}");
+        }
         public void ListStudents()
         {
+            Console.WriteLine(new string('-', 40));
+            
             if (students.Count == 0)
             {
                 Console.WriteLine("There aren't any students.");
                 return;
             }
-            Console.WriteLine("List of students:");
+            DisplayStudentSummary();
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine($"Select a major to filter students (or press Enter to skip):");
+            string selectedMajor = Console.ReadLine()?.Trim();
+            if (!string.IsNullOrEmpty(selectedMajor) && Majors.Contains(selectedMajor, StringComparer.OrdinalIgnoreCase))
+            {
+
+                var normalized = selectedMajor.ToLowerInvariant();
+                var filtered = students.Where(s => s.Major.ToLowerInvariant() == normalized).OrderByDescending(s => s.Age).ToList(); ;
+                if (filtered.Count == 0)
+                {
+                    Console.WriteLine($"No students found in the major '{selectedMajor}'.");
+                    return;
+                }
+                Console.WriteLine($"Students in the major '{selectedMajor}':");
+                foreach (var student in filtered)
+                {
+                    Console.WriteLine(student.GetDetails());
+                }
+                return;
+            }
+            Console.WriteLine("Listing all students:");
             foreach (var student in students)
             {
                 Console.WriteLine(student.GetDetails());
