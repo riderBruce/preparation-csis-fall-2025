@@ -127,16 +127,14 @@ namespace StudentManagerBranch
                 switch (fileType)
                 {
                     case FileType.Txt:
-                        SaveToFile(filePath, '|');
-                        break;
                     case FileType.Csv:
-                        SaveToFile(filePath, ',');
+                        SaveToFile(filePath, fileType == FileType.Txt ? '|' : ',');
                         break;
                     case FileType.Json:
                         await ExportToJsonAsync(filePath);
                         break;
                     case FileType.Xml:
-                         ExportToXmlAsync(filePath);
+                         await ExportToXmlAsync(filePath);
                         break;
                 }
             }
@@ -158,16 +156,14 @@ namespace StudentManagerBranch
                 switch (fileType)
                 {
                     case FileType.Txt:
-                        LoadFromFile(filePath, '|');
-                        break;
                     case FileType.Csv:
-                        LoadFromFile(filePath, ',');
+                        LoadFromFile(filePath, fileType == FileType.Txt ? '|' : ',');
                         break;
                     case FileType.Json:
                         await ImportFromJsonAsync(filePath);
                         break;
                     case FileType.Xml:
-                        ImportFromXmlAsync(filePath);
+                        await ImportFromXmlAsync(filePath);
                         break;
 
                 }
@@ -270,13 +266,13 @@ namespace StudentManagerBranch
                 Console.WriteLine($"Error loading Json: {ex.Message}");
             }
         }
-        private void ExportToXmlAsync(string filePath)
+        private async Task ExportToXmlAsync(string filePath)
         {
             try
             {
                 XmlSerializer serializer = new(typeof(List<Student>));
                 using FileStream fs = new(filePath, FileMode.Create);
-                serializer.Serialize(fs, students);
+                await Task.Run(() => serializer.Serialize(fs, students));
                 Console.WriteLine($"Students saved to Xml file: {filePath}");
             }
             catch (Exception ex)
@@ -284,13 +280,13 @@ namespace StudentManagerBranch
                 Console.WriteLine($"Error saving Xml: {ex.Message}");
             }
         }
-        private void ImportFromXmlAsync(string filePath)
+        private async Task ImportFromXmlAsync(string filePath)
         {
             try
             {
                 XmlSerializer serializer = new(typeof(List<Student>));
                 using FileStream fs = new(filePath, FileMode.Open);
-                students = serializer.Deserialize(fs) as List<Student> ?? new();
+                students = await Task.Run(() => serializer.Deserialize(fs) as List<Student>) ?? new();
                 Console.WriteLine($"Students loaded from Xml file: {filePath}");
             }
             catch (Exception ex)
