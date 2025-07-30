@@ -13,12 +13,28 @@ namespace StudentManagerBranch
         public int StudentsCount => students.Count;
         private List<string> Majors => students.Select(s => s.Major).Distinct().ToList();
         private string MajorsString => string.Join(", ", Majors);
-        private Dictionary<string, int> MajorsCount 
-            => Majors.ToDictionary(majors => majors,
-                                    majors => students.Count(s => s.Major.Equals(majors, StringComparison.OrdinalIgnoreCase)));
-        private string MajorsCountString
-            => string.Join(", ", MajorsCount.Select(KeyValuePair => $"{KeyValuePair.Key}: {KeyValuePair.Value}"));
-
+        
+        private string MajorsSummary()
+        {
+            var result = Majors
+                .ToDictionary(m => m, m => students.Count(s => s.Major.Equals(m, StringComparison.OrdinalIgnoreCase)))
+                .Select(d => $"{d.Key}: {d.Value}")
+                .ToList();
+            return string.Join(", ", result);
+        }
+        private string GetMajorsSummaryWithAverageAge()
+        {
+            var result = students.GroupBy(s => s.Major)
+                .Select(g => new
+                {
+                    Major = g.Key,
+                    Count = g.Count(),
+                    AverageAge = g.Average(s => s.Age)
+                })
+                .Select(g => $"{g.Major}: {g.Count} students, Average Age: {g.AverageAge:F2}")
+                .ToList();
+            return string.Join(", \n", result);
+        }
         public void AddStudent(Student student)
         {
             students.Add(student);
@@ -28,55 +44,72 @@ namespace StudentManagerBranch
         {
             Console.WriteLine($"Total students: {StudentsCount}");
             Console.WriteLine($"Majors: {MajorsString}");
-            Console.WriteLine($"Majors count: {MajorsCountString}");
+            Console.WriteLine($"Majors count: {GetMajorsSummaryWithAverageAge()}");
+        }
+        
+        private void DisplayStudents(string prompt, IEnumerable<Student> studentsForDisplay)
+        {
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(prompt);
+            Console.WriteLine(new string('-', 40));
+            foreach (var student in studentsForDisplay)
+            {
+                Console.WriteLine(student.GetDetails());
+            }
+            Console.WriteLine(new string('-', 40));
+        }
+        private bool IsValidMajorInput(string input) => 
+            !string.IsNullOrWhiteSpace(input) && 
+            Majors.Contains(input, StringComparer.OrdinalIgnoreCase);
+
+        private bool IsListEmpty<T>(List<T> list, string prompt)
+        {
+            if (list == null || list.Count == 0)
+            {
+                Console.WriteLine(prompt);
+                return true;
+            }
+            return false;
         }
         public void ListStudents()
         {
             Console.WriteLine(new string('-', 40));
-            
-            if (students.Count == 0)
-            {
-                Console.WriteLine("There aren't any students.");
+
+            if (IsListEmpty(students, "There arn't any students.")) 
                 return;
-            }
+
             DisplayStudentSummary();
-            Console.WriteLine(new string('-', 40));
+
             Console.WriteLine($"Select a major to filter students (or press Enter to skip):");
             string selectedMajor = Console.ReadLine()?.Trim();
-            if (!string.IsNullOrEmpty(selectedMajor) && Majors.Contains(selectedMajor, StringComparer.OrdinalIgnoreCase))
-            {
 
-                var normalized = selectedMajor.ToLowerInvariant();
-                var filtered = students.Where(s => s.Major.ToLowerInvariant() == normalized).OrderByDescending(s => s.Age).ToList(); ;
-                if (filtered.Count == 0)
-                {
-                    Console.WriteLine($"No students found in the major '{selectedMajor}'.");
-                    return;
-                }
-                Console.WriteLine($"Students in the major '{selectedMajor}':");
-                foreach (var student in filtered)
-                {
-                    Console.WriteLine(student.GetDetails());
-                }
+            if (!IsValidMajorInput(selectedMajor))
+            {
+                Console.WriteLine("No valid major selected. Press any key to view all students...");
+                Console.ReadKey(intercept: true);
+                DisplayStudents("List of all student : ", students);
                 return;
             }
-            Console.WriteLine("Listing all students:");
-            foreach (var student in students)
-            {
-                Console.WriteLine(student.GetDetails());
-            }
+
+            var filtered = students
+                            .Where(s => string.Equals(selectedMajor, s.Major, StringComparison.OrdinalIgnoreCase))
+                            .OrderByDescending(s => s.Age)
+                            .ToList();
+            if (IsListEmpty(filtered, $"No students found in the major '{selectedMajor}'."))
+                return;
+            DisplayStudents($"Students in the major '{selectedMajor}'", filtered);
         }
         public void SearchByName(string name)
         {
-
-            var foundStudents = students.Where(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).ToList();
-            if (!foundStudents.Any())
+            var normalized = name.ToLowerInvariant();
+            var filteredStudents = students.Where(s => s.Name.ToLowerInvariant() == normalized).ToList();
+            if (!filteredStudents.Any())
             {
                 Console.WriteLine($"No students found with the name '{name}'.");
                 return;
             }
-            Console.WriteLine($"Found {foundStudents.Count} student(s) with the name '{name}':");
-            foreach (var student in foundStudents)
+            Console.WriteLine($"Found {filteredStudents.Count} student(s) with the name '{name}':");
+            foreach (var student in filteredStudents)
             {
                 Console.WriteLine(student.GetDetails());
             }
