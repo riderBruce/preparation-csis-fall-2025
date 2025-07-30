@@ -1,7 +1,7 @@
 ﻿using StudentManagerBranch;
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         StudentManager manager = new();
 
@@ -11,7 +11,7 @@ public class Program
             Console.WriteLine("Welcome to the Student Manager!");
             if (manager.StudentsCount == 0)
             {
-                manager.LoadStudents(FileType.Txt);
+                await manager.LoadStudents(FileType.Txt);
             }
             Console.WriteLine($"Current number of students: {manager.StudentsCount}");
             Console.WriteLine(new string('-', 40));
@@ -66,30 +66,32 @@ public class Program
 
                 case "5":
                     {
-                        Console.Write("Choose file type to save (txt/csv/json): ");
+                        string fileTypes = string.Join("/", Enum.GetNames(typeof(FileType)));
+                        Console.Write($"Choose file type to save ({fileTypes}): ");
                         string input = Console.ReadLine();
                         if (Enum.TryParse<FileType>(input, true, out FileType fileType))
                         {
-                            manager.SaveStudents(fileType);
+                            await manager.SaveStudents(fileType);
                         }
                         else
                         {
-                            Console.WriteLine("Invalid file type. Please enter 'txt', 'csv', or 'json'.");
+                            Console.WriteLine($"Invalid file type. Please enter {fileTypes}.");
                         }
                         break;
                     }
 
                 case "6":
                     {
-                        Console.Write("Choose file type to load (txt/csv/json): ");
+                        string fileTypes = string.Join("/", Enum.GetNames(typeof(FileType)));
+                        Console.Write($"Choose file type to load ({fileTypes}): ");
                         string input = Console.ReadLine();
                         if (Enum.TryParse<FileType>(input, true, out FileType fileType))
                         {
-                            manager.LoadStudents(fileType);
+                            await manager.LoadStudents(fileType);
                         }
                         else
                         {
-                            Console.WriteLine("Invalid file type. Please enter 'txt', 'csv', or 'json'.");
+                            Console.WriteLine($"Invalid file type. Please enter {fileTypes}.");
                         }
                         break;
                     }

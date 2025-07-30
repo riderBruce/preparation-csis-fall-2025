@@ -103,4 +103,47 @@ serializer.Serialize(fs, students);
 
 ## ✨ Let’s Build
 
-Today is about leveling up: smarter queries, faster saves, and cleaner formats. You’re not just coding — you’re building like a pro. 🚀
+## 🧩 Part 2 – Async Save/Load for JSON
+
+We'll convert:
+
+ExportToJson → ExportToJsonAsync  
+ImportFromJson → ImportFromJsonAsync
+
+With this, you'll use:
+
+await File.WriteAllTextAsync(...)
+await File.ReadAllTextAsync(...)
+
+This prepares your code for scalability — async is vital when working with UI or servers.
+
+## 📦 Part 3 – Add XML Support
+
+    Add to enum FileType:
+
+Xml
+
+    Use:
+
+System.Xml.Serialization.XmlSerializer
+
+    Create methods:
+
+ExportToXml(FilePath)
+ImportFromXml(FilePath)
+
+    Note: You’ll need a public parameterless constructor for Student, and the class must be [Serializable] or have [XmlRoot].
+
+## 🧪 Part 4 – Code Cleanup & Validator Class
+
+Review your main program:
+
+    See if repeated logic (file prompts, validations, empty list check, etc.) can be centralized.
+
+    Consider a StudentValidator class that checks:
+
+        Is name valid?
+
+        Is major in the allowed list?
+
+        Is age a reasonable number?

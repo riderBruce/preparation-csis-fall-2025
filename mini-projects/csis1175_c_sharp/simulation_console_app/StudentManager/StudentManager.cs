@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Xml.Serialization;
 using System.Threading.Tasks;
 
 namespace StudentManagerBranch
 {
-    internal class StudentManager
+    public class StudentManager
     {
         List<Student> students = new();
         public int StudentsCount => students.Count;
         private List<string> Majors => students.Select(s => s.Major).Distinct().ToList();
         private string MajorsString => string.Join(", ", Majors);
-        
+
         private string MajorsSummary()
         {
             var result = Majors
@@ -46,7 +47,7 @@ namespace StudentManagerBranch
             Console.WriteLine($"Majors: {MajorsString}");
             Console.WriteLine($"Majors count: {GetMajorsSummaryWithAverageAge()}");
         }
-        
+
         private void DisplayStudents(string prompt, IEnumerable<Student> studentsForDisplay)
         {
             Console.WriteLine(new string('-', 40));
@@ -58,8 +59,8 @@ namespace StudentManagerBranch
             }
             Console.WriteLine(new string('-', 40));
         }
-        private bool IsValidMajorInput(string input) => 
-            !string.IsNullOrWhiteSpace(input) && 
+        private bool IsValidMajorInput(string input) =>
+            !string.IsNullOrWhiteSpace(input) &&
             Majors.Contains(input, StringComparer.OrdinalIgnoreCase);
 
         private bool IsListEmpty<T>(List<T> list, string prompt)
@@ -75,7 +76,7 @@ namespace StudentManagerBranch
         {
             Console.WriteLine(new string('-', 40));
 
-            if (IsListEmpty(students, "There arn't any students.")) 
+            if (IsListEmpty(students, "There arn't any students."))
                 return;
 
             DisplayStudentSummary();
@@ -114,7 +115,7 @@ namespace StudentManagerBranch
                 Console.WriteLine(student.GetDetails());
             }
         }
-        public void SaveStudents(FileType fileType, string filePath = "")
+        public async Task SaveStudents(FileType fileType, string filePath = "")
         {
             if (string.IsNullOrWhiteSpace(filePath))
                 filePath = GetDefaultPath(fileType);
@@ -132,7 +133,10 @@ namespace StudentManagerBranch
                         SaveToFile(filePath, ',');
                         break;
                     case FileType.Json:
-                        SaveToJson(filePath);
+                        await ExportToJsonAsync(filePath);
+                        break;
+                    case FileType.Xml:
+                         ExportToXmlAsync(filePath);
                         break;
                 }
             }
@@ -142,7 +146,7 @@ namespace StudentManagerBranch
             }
             Console.WriteLine($"Students saved to {filePath}");
         }
-        public void LoadStudents(FileType fileType, string filePath = "")
+        public async Task LoadStudents(FileType fileType, string filePath = "")
         {
             if (string.IsNullOrWhiteSpace(filePath))
                 filePath = GetDefaultPath(fileType);
@@ -160,8 +164,12 @@ namespace StudentManagerBranch
                         LoadFromFile(filePath, ',');
                         break;
                     case FileType.Json:
-                        LoadFromJson(filePath);
+                        await ImportFromJsonAsync(filePath);
                         break;
+                    case FileType.Xml:
+                        ImportFromXmlAsync(filePath);
+                        break;
+
                 }
             }
             catch (Exception ex)
@@ -197,6 +205,7 @@ namespace StudentManagerBranch
             FileType.Txt => "students.txt",
             FileType.Csv => "students.csv",
             FileType.Json => "students.json",
+            FileType.Xml => "students.xml",
             _ => "students.txt",
         };
         private void SaveToFile(string filePath, char divider)
@@ -219,7 +228,7 @@ namespace StudentManagerBranch
                     continue;
                 }
                 if (parts[0] == "Name" && parts[1] == "Age" && parts[2] == "Major") continue;
-                
+
                 students.Add(new Student(parts[0].Trim(),
                                          int.TryParse(parts[1].Trim(), out int parsedAge) ? parsedAge : 0,
                                          parts[2].Trim()));
@@ -235,11 +244,66 @@ namespace StudentManagerBranch
             string json = File.ReadAllText(filePath);
             students = JsonSerializer.Deserialize<List<Student>>(json) ?? new List<Student>();
         }
+        private async Task ExportToJsonAsync(string filePath = "students.Json")
+        {
+            try
+            {
+                var option = new JsonSerializerOptions { WriteIndented = true };
+                string json = JsonSerializer.Serialize(students, option);
+                await File.WriteAllTextAsync(filePath, json);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving Json: {ex.Message}");
+            }
+        }
+        private async Task ImportFromJsonAsync(string filePath = "students.Json")
+        {
+            try
+            {
+                string json = await File.ReadAllTextAsync(filePath);
+                students = JsonSerializer.Deserialize<List<Student>>(json) ?? new List<Student>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading Json: {ex.Message}");
+            }
+        }
+        private void ExportToXmlAsync(string filePath)
+        {
+            try
+            {
+                XmlSerializer serializer = new(typeof(List<Student>));
+                using FileStream fs = new(filePath, FileMode.Create);
+                serializer.Serialize(fs, students);
+                Console.WriteLine($"Students saved to Xml file: {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving Xml: {ex.Message}");
+            }
+        }
+        private void ImportFromXmlAsync(string filePath)
+        {
+            try
+            {
+                XmlSerializer serializer = new(typeof(List<Student>));
+                using FileStream fs = new(filePath, FileMode.Open);
+                students = serializer.Deserialize(fs) as List<Student> ?? new();
+                Console.WriteLine($"Students loaded from Xml file: {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading Xml: {ex.Message}");
+            }
+        }
     }
     public enum FileType
     {
         Txt,
         Csv,
         Json,
+        Xml,
     }
 }
