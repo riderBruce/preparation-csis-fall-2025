@@ -19,13 +19,7 @@ namespace StudentManagerBranch
             Major = major;
         }
         
-        public override string GetDetails()
-        {
-            return base.GetDetails() + $" | Major: {Major}";
-        }
-        public override string GetDetails(char divider)
-        {
-            return base.GetDetails(divider) + $"{divider}{Major}";
-        }
+        public override string GetDetails() => base.GetDetails() + $" | Major: {Major}";
+        public override string GetDetails(char divider) => base.GetDetails(divider) + $"{divider}{Major}";
     }
 }

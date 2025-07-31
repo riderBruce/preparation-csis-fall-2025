@@ -1,7 +1,20 @@
 ﻿using StudentManagerBranch;
 public class Program
 {
-    public static async Task Main(string[] args)
+    public static async Task Main()
+    {
+        PersonManager manager = new();
+
+        manager.AddPerson(new Student("Alice", 20, "Math"));
+        manager.AddPerson(new Teacher("Mr. Smith", 45, "History"));
+        manager.ListPeople();
+
+        await manager.SaveToJsonAsync();
+        manager = new();
+        await manager.LoadFromJsonAsync();
+        manager.ListPeople();
+    }
+    public static async Task _Main(string[] args)
     {
         StudentManager manager = new();
 

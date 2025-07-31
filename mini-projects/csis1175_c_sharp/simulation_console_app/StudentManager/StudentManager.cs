@@ -133,8 +133,7 @@ namespace StudentManagerBranch
                 switch (fileType)
                 {
                     case FileType.Txt:
-                    case FileType.Csv:
-                        SaveToFile(filePath, fileType == FileType.Txt ? '|' : ',');
+                        SaveToFile(filePath, '|');
                         break;
                     case FileType.Json:
                         await ExportToJsonAsync(filePath);
@@ -162,8 +161,7 @@ namespace StudentManagerBranch
                 switch (fileType)
                 {
                     case FileType.Txt:
-                    case FileType.Csv:
-                        LoadFromFile(filePath, fileType == FileType.Txt ? '|' : ',');
+                        LoadFromFile(filePath, '|');
                         break;
                     case FileType.Json:
                         await ImportFromJsonAsync(filePath);
@@ -205,7 +203,6 @@ namespace StudentManagerBranch
         private string GetDefaultPath(FileType fileType) => fileType switch
         {
             FileType.Txt => "students.txt",
-            FileType.Csv => "students.csv",
             FileType.Json => "students.json",
             FileType.Xml => "students.xml",
             _ => "students.txt",

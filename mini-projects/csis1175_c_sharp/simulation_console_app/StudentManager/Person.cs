@@ -13,13 +13,9 @@ namespace StudentManagerBranch
 
         public Person() { }
 
-        public virtual string GetDetails()
-        {
-            return $"Name: {Name} | Age: {Age}";
-        }
-        public virtual string GetDetails(char divider)
-        {
-            return $"{Name}{divider}{Age}";
-        }
+        public virtual string GetDetails() => $"Name: {Name} | Age: {Age}";
+        
+        public virtual string GetDetails(char divider) => $"{Name}{divider}{Age}";
+        
     }
 }

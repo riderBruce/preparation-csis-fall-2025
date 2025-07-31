@@ -9,7 +9,6 @@ namespace StudentManagerBranch
     public enum FileType
     {
         Txt,
-        Csv,
         Json,
         Xml,
     }

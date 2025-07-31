@@ -16,13 +16,9 @@ namespace StudentManagerBranch
             Age = age;
             Subject = subject;
         }
-        public override string GetDetails()
-        {
-            return base.GetDetails() + $" | Subject: {Subject}";
-        }
-        public override string GetDetails(char divider)
-        {
-            return base.GetDetails(divider) + $"{divider}{Subject}";
-        }
+        public override string GetDetails() => base.GetDetails() + $" | Subject: {Subject}";
+        
+        public override string GetDetails(char divider) => base.GetDetails(divider) + $"{divider}{Subject}";
+        
     }
 }
