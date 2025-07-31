@@ -119,31 +119,28 @@ This prepares your code for scalability — async is vital when working with UI 
 
 ## 📦 Part 3 – Add XML Support
 
-    Add to enum FileType:
+- Add to enum FileType:
 
-Xml
+  - Xml
 
-    Use:
+- Use:
 
-System.Xml.Serialization.XmlSerializer
+  - System.Xml.Serialization.XmlSerializer
 
-    Create methods:
+- Create methods:
 
-ExportToXml(FilePath)
-ImportFromXml(FilePath)
+  - ExportToXml(FilePath)
+  - ImportFromXml(FilePath)
 
-    Note: You’ll need a public parameterless constructor for Student, and the class must be [Serializable] or have [XmlRoot].
+- Note: You’ll need a public parameterless constructor for Student, and the class must be [Serializable] or have [XmlRoot].
 
 ## 🧪 Part 4 – Code Cleanup & Validator Class
 
-Review your main program:
+- Review your main program:
 
-    See if repeated logic (file prompts, validations, empty list check, etc.) can be centralized.
+  - See if repeated logic (file prompts, validations, empty list check, etc.) can be centralized.
 
-    Consider a StudentValidator class that checks:
-
-        Is name valid?
-
-        Is major in the allowed list?
-
-        Is age a reasonable number?
+- Consider a StudentValidator class that checks:
+  - Is name valid?
+  - Is major in the allowed list?
+  - Is age a reasonable number?

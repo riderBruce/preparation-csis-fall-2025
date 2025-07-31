@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace StudentManagerBranch
 {
-    public class Student
+    public class Student : Person
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
         public string Major { get; set; }
 
         public Student() { }
-        public Student(string name)
-        {
-            Name = name;
-        }
+        public Student(string name) => Name = name;
         public Student(string name, int age, string major)
         {
             Name = name;
@@ -24,13 +19,13 @@ namespace StudentManagerBranch
             Major = major;
         }
         
-        public string GetDetails()
+        public override string GetDetails()
         {
-            return $"Name: {Name} | Age: {Age} | Major: {Major}";
+            return base.GetDetails() + $" | Major: {Major}";
         }
-        public string GetDetails(char divider)
+        public override string GetDetails(char divider)
         {
-            return $"{Name}{divider}{Age}{divider}{Major}";
+            return base.GetDetails(divider) + $"{divider}{Major}";
         }
     }
 }
