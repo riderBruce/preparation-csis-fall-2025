@@ -23,6 +23,7 @@ namespace StudentManagerBranch
             Age = age;
             Major = major;
         }
+        
         public string GetDetails()
         {
             return $"Name: {Name} | Age: {Age} | Major: {Major}";

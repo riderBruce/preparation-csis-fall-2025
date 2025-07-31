@@ -36,8 +36,14 @@ namespace StudentManagerBranch
                 .ToList();
             return string.Join(", \n", result);
         }
+        
         public void AddStudent(Student student)
         {
+            if (!StudentValidator.IsValidStudent(student))
+            {
+                Console.WriteLine("Invalid student details.");
+                return;
+            }
             students.Add(student);
             Console.WriteLine("Student added successfully.");
         }
@@ -134,7 +140,7 @@ namespace StudentManagerBranch
                         await ExportToJsonAsync(filePath);
                         break;
                     case FileType.Xml:
-                         await ExportToXmlAsync(filePath);
+                        await ExportToXmlAsync(filePath);
                         break;
                 }
             }
@@ -294,12 +300,5 @@ namespace StudentManagerBranch
                 Console.WriteLine($"Error loading Xml: {ex.Message}");
             }
         }
-    }
-    public enum FileType
-    {
-        Txt,
-        Csv,
-        Json,
-        Xml,
     }
 }

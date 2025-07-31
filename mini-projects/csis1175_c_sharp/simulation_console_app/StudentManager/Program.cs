@@ -40,12 +40,9 @@ public class Program
 
                 case "2":
                     {
-                        Console.Write("Enter the student's name: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Enter the student's age: ");
-                        int age = int.Parse(Console.ReadLine());
-                        Console.Write("Enter the student's major: ");
-                        string major = Console.ReadLine();
+                        string name = ReadValidName("Enter the student's name: ");
+                        int age = ReadValidAge("Enter the student's age: ");
+                        string major = ReadValidMajor("Enter the student's major (max 50 characters): ");
                         manager.AddStudent(new Student(name, age, major));
                         break;
                     }
@@ -115,5 +112,29 @@ public class Program
         Console.Write(prompt);
         string input = Console.ReadLine();
         return string.IsNullOrWhiteSpace(input) ? defaultValue : input;
+    }
+    public static string ReadValidName(string prompt)
+    {
+        Console.Write(prompt);
+        string input = Console.ReadLine();
+        return StudentValidator.IsValidName(input)
+            ? input
+            : ReadValidName("Invalid name. Please enter a valid name: ");
+    }
+    public static int ReadValidAge(string prompt)
+    {
+        Console.Write(prompt);
+        string input = Console.ReadLine();
+        return int.TryParse(input, out int age) && StudentValidator.IsValidAge(age)
+            ? age
+            : ReadValidAge("Invalid age. Please enter a valid age between 0 and 150: ");
+    }
+    private static string ReadValidMajor(string prompt)
+    {
+        Console.Write(prompt);
+        string input = Console.ReadLine();
+        return StudentValidator.IsValidMajor(input)
+            ? input
+            : ReadValidMajor("Invalid major. Please enter a valid major (max 50 characters): ");
     }
 }
