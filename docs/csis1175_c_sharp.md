@@ -1,4 +1,4 @@
-Introduction to Programming I
+# Introduction to Programming I
 
 Faculty
 
@@ -10,73 +10,73 @@ Computing Studies & Information Systems
 
 Course code
 
-CSIS 1175
+## CSIS 1175
 
 This course introduces students to computing science and programming. It includes fundamental concepts and terminology of computing science, program design and fundamental building blocks for programming in a high-level language. Topics cover, but are not limited to Windows forms, properties, pseudo code, data types, arrays, operators, control structures, methods, classes, objects, and fundamental algorithms.
 
-Course content
+## Course content
 
 1) Programming in general
 
-* Program development cycle
+    - Program development cycle
 
-* Programming tools – flowcharts, pseudocode
+    - Programming tools – flowcharts, pseudocode
 
-* Integrated development environment
+    - Integrated development environment
 
 2) Programming in C#, NET
 
-* Console application development
+    - Console application development
 
-* Data type and expressions
+    - Data type and expressions
 
-* Variables and constants
+    - Variables and constantss
 
-* Graphical User Interface (GUI)
+    - Graphical User Interface (GUI)
 
-* Windows Forms
+    - Windows Forms
 
 3) Methods
 
-* Calling and implementing methods
+    - Calling and implementing methods
 
-* Scope of variables
+    - Scope of variables
 
-* Value-type and reference-type parameters
+    - Value-type and reference-type parameters
 
 4) Fundamental of Object-Oriented Programming (OOP)
 
-* Classes and objects
+    - Classes and objects
 
-* Properties, methods and constructors
+    - Properties, methods and constructors
 
-* Method and constructor overloading
+    - Method and constructor overloading
 
 5) Flow of control
 
-* Relational and logical operators
+    - Relational and logical operators
 
-* Conditional statements
+    - Conditional statements
 
-* Repetitions
+    - Repetitions
 
 6) Basic data structures and algorithm
 
-* One-dimensional and two-dimensional arrays
+    - One-dimensional and two-dimensional arrays
 
-* Dictionary
+    - Dictionary
 
-* List/ArrayList
+    - List/ArrayList
 
-* Searching and sorting
+    - Searching and sorting
 
 7) File I/O
 
-* Reading and writing text files
+    - Reading and writing text files
 
-* LINQ
+    - LINQ
 
-Learning activities
+## Learning activities
 
 Lecture, seminars, laboratory assignments, reading, and research
 
@@ -92,17 +92,17 @@ Quizzes 10%-30%
 
 Midterm Examination 20%-30%
 
-Final Examination* 30%-40%
+Final Examination- 30%-40%
 
 Total 100%
 
-* Practical hands-on programming exam
+- Practical hands-on programming exam
 
 In order to pass the course, students must, in addition to receiving an overall course grade of 50%, also achieve a grade of at least 50% on the combined weighted examination components (including quizzes, tests, exams).
 
 Students may conduct research as part of their coursework in this class. Instructors for the course are responsible for ensuring that student research projects comply with College policies on ethical conduct for research involving humans, which can require obtaining Informed Consent from participants and getting the approval of the Douglas College Research Ethics Board prior to conducting the research.
 
-Learning outcomes
+## Learning outcomes
 
 At the end of this course, successful students will be able to:
 
@@ -130,7 +130,7 @@ At the end of this course, successful students will be able to:
 
 12. design a working program to solve a well-defined problem.
 
-Textbook materials
+## Textbook materials
 
 Textbooks and Materials to be Purchased by Students
 
