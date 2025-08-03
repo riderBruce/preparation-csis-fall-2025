@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      .wrapper {
+        padding: 40px;
+        background-color: #fff;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-template-areas: "sidebar photos";
+      }
+      .sidebar {
+        grid-area: sidebar;
+      }
+      .photo-gallery {
+        display: grid;
+        grid-area: photos;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .photo-gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .photo-gallery img:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">sidebar</div>
+      <div class="photo-gallery">
+        <img src="https://picsum.photos/300?random=1" alt="Photo 1" />
+        <img src="https://picsum.photos/300?random=2" alt="Photo 2" />
+        <img src="https://picsum.photos/300?random=3" alt="Photo 3" />
+        <img src="https://picsum.photos/300?random=4" alt="Photo 4" />
+        <img src="https://picsum.photos/300?random=5" alt="Photo 5" />
+        <img src="https://picsum.photos/300?random=6" alt="Photo 6" />
+      </div>
+    </div>
+  </body>
+</html>

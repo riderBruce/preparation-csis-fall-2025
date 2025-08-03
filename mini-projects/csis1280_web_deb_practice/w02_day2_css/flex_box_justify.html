@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flexbox Justify Comparison</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+
+    h2 {
+      margin-top: 40px;
+    }
+
+    .demo-container {
+      display: flex;
+      justify-content: space-between; /* Change this */
+      
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      min-height: 100px;
+    }
+
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      background-color: #ffd86b;
+      padding: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 8px;
+      min-width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>space-between</h2>
+  <div class="demo-container" style="justify-content: space-between;">
+    <div class="box">A</div>
+    <div class="box">B</div>
+    <div class="box">C</div>
+  </div>
+
+  <h2>space-around</h2>
+  <div class="demo-container" style="justify-content: space-around;">
+    <div class="box">A</div>
+    <div class="box">B</div>
+    <div class="box">C</div>
+  </div>
+
+  <h2>space-evenly</h2>
+  <div class="demo-container" style="justify-content: space-evenly;">
+    <div class="box">A</div>
+    <div class="box">B</div>
+    <div class="box">C</div>
+  </div>
+
+</body>
+</html>
