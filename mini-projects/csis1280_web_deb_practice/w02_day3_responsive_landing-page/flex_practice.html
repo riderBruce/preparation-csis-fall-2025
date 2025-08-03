@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .container {
+        display: flex;
+        gap: 10px;
+        /* width: 800px; */
+        border: 2px solid black;
+        padding: 10px;
+      }
+
+      .box {
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* Experiment with different flex settings below */
+
+      .one {
+        background-color: crimson;
+        flex: 1 1 250px;
+      }
+
+      .two {
+        background-color: darkblue;
+        flex: 3 0 250px; /* grows twice as much as .one */
+      }
+
+      .three {
+        background-color: green;
+        flex: 1 1 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="box one">1</div>
+        <div class="box two">2</div>
+        <div class="box three">3</div>
+      </div>
+    </div>
+  </body>
+</html>

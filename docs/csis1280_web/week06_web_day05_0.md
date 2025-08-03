@@ -59,4 +59,3 @@ Build a responsive layout with:
 
 ---
 
-Let me know when you're ready to begin today's coding challenge!
