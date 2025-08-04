@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 8px;
+      }
+      input {
+        display: block;
+        width: 90%;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+      #error-message {
+        color: red;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="register-form">
+      <h2>Register</h2>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Submit</button>
+
+      <div id="error-message"></div>
+    </form>
+  </body>
+  <script>
+    const form = document.getElementById("register-form");
+    const errorDiv = document.getElementById("error-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // stop form from submitting
+      const username = form.username.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+
+      let errors = [];
+
+      if (username.length < 3) {
+        errors.push("Username must be at least 3 characters.");
+      }
+      if (!email.includes("@")) {
+        errors.push("Email must be valid.");
+      }
+      if (password.length < 6) {
+        errors.push("Password must be at least 6 characters.");
+      }
+
+      if (errors.length > 0) {
+        errorDiv.innerHTML = errors.join("<br>");
+      } else {
+        errorDiv.innerHTML = "✅ Registration successful!";
+        form.reset();
+      }
+    });
+  </script>
+</html>

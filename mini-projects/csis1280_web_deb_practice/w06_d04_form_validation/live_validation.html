@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Improved Registration</title>
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        background-color: bisque;
+        padding: 20px;
+      }
+      #registration {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      #registration input {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+      }
+      input.valid {
+        border-color: green;
+      }
+      input.invalid {
+        border-color: red;
+      }
+      #errorDiv {
+        font-size: 0.9em;
+        margin-top: 5px;
+        color: red;
+      }
+      .toast {
+        margin-top: 10px;
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <form id="registration">
+        <h2>Register</h2>
+        <label for="name">ID</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          placeholder="Enter your name"
+        />
+
+        <label for="email">EMAIL</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          placeholder="Enter your email"
+        />
+
+        <label for="password">PASSWORD</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          placeholder="Minimum 6 characters"
+        />
+
+        <button type="submit">Enter</button>
+        <div id="errorDiv"></div>
+        <div class="toast" id="toastMsg"></div>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("registration");
+      const errorDiv = document.getElementById("errorDiv");
+      const toastMsg = document.getElementById("toastMsg");
+
+      const inputs = form.querySelectorAll("input");
+
+      form.addEventListener("input", () => {
+        validateInputs();
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (validateInputs()) {
+          toastMsg.textContent = "✅ Successfully added!";
+          errorDiv.innerHTML = "";
+          form.reset();
+          inputs.forEach((input) => input.classList.remove("valid", "invalid"));
+          setTimeout(() => {
+            toastMsg.textContent = "";
+          }, 3000);
+        }
+      });
+
+      function validateInputs() {
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const password = form.password.value;
+
+        let errors = [];
+
+        if (name.length < 3) {
+          errors.push("Put your name with min 3 letters.");
+          setInvalid(form.name);
+        } else {
+          setValid(form.name);
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          errors.push("Enter a valid email address.");
+          setInvalid(form.email);
+        } else {
+          setValid(form.email);
+        }
+
+        if (password.length < 6) {
+          errors.push("Password must be at least 6 characters.");
+          setInvalid(form.password);
+        } else {
+          setValid(form.password);
+        }
+
+        errorDiv.innerHTML = errors.join("<br>");
+        return errors.length === 0;
+      }
+
+      function setValid(input) {
+        input.classList.add("valid");
+        input.classList.remove("invalid");
+      }
+
+      function setInvalid(input) {
+        input.classList.add("invalid");
+        input.classList.remove("valid");
+      }
+    </script>
+  </body>
+</html>

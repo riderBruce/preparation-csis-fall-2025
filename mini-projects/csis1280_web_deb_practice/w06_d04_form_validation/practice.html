@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice</title>
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .wrapper {
+        /* display: flex; */
+        justify-content: center;
+        background-color: bisque;
+        max-width: 300px;
+      }
+      #registration {
+        display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
+        padding-bottom: 10px;
+        margin: 10px;
+      }
+      #registration input {
+        width: 90%;
+        display: block;
+        padding-top: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <form id="registration">
+        <h2>Register</h2>
+        <label for="name">ID</label>
+        <input id="name" type="text" required placeholder="input your name" />
+
+        <label for="email">EMAIL</label>
+        <input
+          id="email"
+          type="email"
+          required
+          placeholder="input your email"
+        />
+
+        <label for="password">PASSWORD</label>
+        <input id="password" type="password" required />
+
+        <button id="submitBtn" type="submit">Enter</button>
+
+        <div id="errorDiv"></div>
+      </form>
+    </div>
+  </body>
+  <script>
+    const rf = document.getElementById("registration");
+    const errorDiv = document.getElementById("errorDiv");
+
+    rf.addEventListener("input", () => validateInputs());
+
+    rf.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (validateInputs()) {
+        errorDiv.innerHTML = "successfully added.";
+        rf.reset();
+      }
+    });
+    function validateInputs() {
+      const name = rf.name.value.trim();
+      const email = rf.email.value.trim();
+      const password = rf.password.value;
+
+      let errorText = [];
+
+      if (name.length < 3) {
+        errorText.push("Put your name with min 3 letters.");
+      }
+      if (!email.includes("@")) {
+        errorText.push("Email should contain @.");
+      }
+      if (password.length < 6) {
+        errorText.push("Password need at least 6 letters.");
+      }
+
+      errorDiv.style.color = errorText.length > 0 ? "red" : "green";
+
+      errorDiv.innerHTML = errorText.join("<br>");
+      return errorText.length === 0;
+    }
+  </script>
+</html>
