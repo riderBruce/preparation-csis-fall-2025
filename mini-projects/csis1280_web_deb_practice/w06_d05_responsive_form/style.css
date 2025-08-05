@@ -1,0 +1,63 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+  margin: 0;
+  /* color: white; */
+  /* background-color: black; */
+}
+
+.form-wrapper {
+  /* background-color: rgb(50, 32, 32); */
+  display: flex;
+  padding: 20px;
+  max-width: 600px;
+  align-items: center;
+}
+
+#contact-form {
+  /* background-color: rgb(44, 59, 72); */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#contact-form .inputBox {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+#contact-form .inputBox:focus {
+  background-color: aquamarine;
+}
+
+#contact-form button:hover {
+  background-color: blueviolet;
+}
+
+#errorMsgs {
+  color: red;
+}
+
+#toastMsg {
+  color: greenyellow;
+}
+
+@media (max-width: 768px) {
+  #contact-form {
+    flex-direction: column;
+  }
+}
+
+.dark-mode {
+    color: white;
+  background-color: black;
+}
+
+.dark-mode button {
+  background-color: bisque;
+}
+
+.dark-mode button:hover {
+  background-color: rgb(70, 65, 58);
+}

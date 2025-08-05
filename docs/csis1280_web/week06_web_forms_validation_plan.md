@@ -1,4 +1,4 @@
-## 📅 Bonus Topic: Forms & Input Validation (HTML, CSS, JS)
+# 📅 Bonus Topic: Forms & Input Validation (HTML, CSS, JS)
 
 ### ✅ Goals
 

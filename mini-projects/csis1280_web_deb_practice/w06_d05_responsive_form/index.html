@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Contact Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-wrapper">
+      <form id="contact-form">
+        <h2>Contact Us</h2>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" class="inputBox" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" class="inputBox" required />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          class="inputBox"
+          required
+        ></textarea>
+
+        <button type="submit">Send</button>
+        <div id="errorMsgs" aria-live="polite"></div>
+        <div id="toastMsg" aria-live="polite"></div>
+        <button id="darkModeBtn">Dark Mode</button>
+      </form>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
