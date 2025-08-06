@@ -1,63 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Highlighter App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      line-height: 1.6;
-    }
-
-    .btn-highlight {
-      margin-bottom: 20px;
-      padding: 8px 12px;
-      background-color: gold;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    mark {
-      background-color: yellow;
-      padding: 0 2px;
-    }
-  </style>
-</head>
-<body>
-
-  <button class="btn-highlight">Highlight Selection</button>
-
-  <p id="content">
-    JavaScript is a programming language used to create dynamic and interactive effects within web browsers. It allows developers to implement complex features like updating content, controlling multimedia, and animating images.
-  </p>
-
-  <script>
-    const button = document.querySelector(".btn-highlight");
-    const content = document.getElementById("content");
-
-    button.addEventListener("click", () => {
-      const selection = window.getSelection();
-
-      if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const selectedText = selection.toString();
-
-        if (selectedText.length > 0) {
-          const mark = document.createElement("mark");
-          mark.textContent = selectedText;
-
-          range.deleteContents();
-          range.insertNode(mark);
-
-          // Clear the selection
-          selection.removeAllRanges();
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Highlighter App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
       }
-    });
-  </script>
 
-</body>
+      .btn-highlight {
+        margin-bottom: 20px;
+        padding: 8px 12px;
+        background-color: gold;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      mark {
+        background-color: yellow;
+        padding: 0 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn-highlight">Highlight Selection</button>
+
+    <p id="content">
+      JavaScript is a programming language used to create dynamic and
+      interactive effects within web browsers. It allows developers to implement
+      complex features like updating content, controlling multimedia, and
+      animating images.
+    </p>
+    <script src="script.js"></script>
+  </body>
 </html>
