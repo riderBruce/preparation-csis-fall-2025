@@ -11,7 +11,8 @@
         line-height: 1.6;
       }
 
-      .btn-highlight {
+      .btn-highlight,
+      .undo {
         margin-bottom: 20px;
         padding: 8px 12px;
         background-color: gold;
@@ -20,15 +21,51 @@
         font-weight: bold;
       }
 
+
       mark {
         background-color: yellow;
         padding: 0 2px;
+      }
+
+      .color-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: antiquewhite;
+        padding: 10px;
+      }
+      .color-wrapper button {
+        border: none;
+        height: 50px;
+        width: 15%;
+        cursor: pointer;
+      }
+      .color-wrapper button:hover {
+        transform: scale(1.05)
+      }
+      .d {
+        background-color: gold;
+      }
+      .r {
+        background-color: rgb(255, 104, 104);
+      }
+      .g {
+        background-color: greenyellow;
+      }
+      .b {
+        background-color: rgb(135, 155, 222);
       }
     </style>
   </head>
   <body>
     <button class="btn-highlight">Highlight Selection</button>
-
+    <button class="undo">Undo</button>
+    <div class="color-wrapper">
+      <h3>Select Highligh Colors</h2>
+      <button class="color-selector r">Red</button>
+      <button class="color-selector g">Green</button>
+      <button class="color-selector b">Blue</button>
+    </div>
     <p id="content">
       JavaScript is a programming language used to create dynamic and
       interactive effects within web browsers. It allows developers to implement
