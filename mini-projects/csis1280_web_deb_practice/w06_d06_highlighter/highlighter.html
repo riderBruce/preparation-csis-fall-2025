@@ -12,7 +12,8 @@
       }
 
       .btn-highlight,
-      .undo {
+      .undo,
+      .clear-all {
         margin-bottom: 20px;
         padding: 8px 12px;
         background-color: gold;
@@ -55,16 +56,41 @@
       .b {
         background-color: rgb(135, 155, 222);
       }
+      .selector {
+        flex-direction: column;
+        padding: 2px;
+        margin: 2px;
+      }
+      h4 {
+        margin: 0px;
+      }
+      .picker {
+        border: 0cap;
+        border-radius: 3%;
+      }
+      #highlighted li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        border-radius: 4px;
+      }
     </style>
   </head>
   <body>
     <button class="btn-highlight">Highlight Selection</button>
     <button class="undo">Undo</button>
+    <button class="clear-all">Clear</button>
     <div class="color-wrapper">
       <h3>Select Highligh Colors</h2>
-      <button class="color-selector r">Red</button>
-      <button class="color-selector g">Green</button>
-      <button class="color-selector b">Blue</button>
+      <button class="color-selector r" data-color="r">Red</button>
+      <button class="color-selector g" data-color="g">Green</button>
+      <button class="color-selector b" data-color="b">Blue</button>
+    <div class="selector">
+    <h4>Select</h4>  
+      <input class="picker" type="color"/>
+    </div>
     </div>
     <p id="content">
       JavaScript is a programming language used to create dynamic and
@@ -72,6 +98,7 @@
       complex features like updating content, controlling multimedia, and
       animating images.
     </p>
+    <ul id="highlighted"></ul>
     <script src="script.js"></script>
   </body>
 </html>
