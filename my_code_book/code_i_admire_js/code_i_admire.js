@@ -235,3 +235,5 @@ function updateCustomHighlightColor(hexColor) {
   highlightBtn.style.backgroundColor = hexColor;
   currentColor = hexColor;
 }
+
+
