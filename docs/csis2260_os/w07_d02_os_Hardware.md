@@ -141,5 +141,63 @@ for req in requests:
 - Notes on OS roles & types.
 - Completed pseudocode test.
 - Working code simulation in Python or JS.
-- Quiz answers recorded.
 
+  ```js
+  function allocation(resources, requests) {
+    const log = [];
+    for (req of requests) {
+      log.push(`Requesting: ${req}...`);
+      const available = resources[req] ?? 0;
+      if (available > 0) {
+        resources[req] -= 1;
+        log.push(`Allocated ${req}`);
+      } else {
+        log.push(`${req} is unavailable. Wait...`);
+      }
+    }
+    return log;
+  }
+
+  const resources = {
+    computer: 1,
+    printer: 1,
+  };
+  const requests = ["computer", "printer", "computer", "router"];
+
+  console.log(allocation(resources, requests));
+  ```
+
+  ```csharp
+  public static void Main(string[] args)
+    {
+        var resources = new Dictionary<string, int> {
+      {"computer", 1},
+      {"printer", 1}
+    };
+        var requests = new List<string> {
+      "computer",
+      "printer",
+      "scanner",
+      "printer",
+    };
+        foreach (var req in requests)
+        {
+            Console.WriteLine($"Requesting {req}...");
+            Console.WriteLine(TryAllocate(resources, req)
+              ? $"Allocated {req}!"
+                : $"{req} is unavailable. Wait...");
+        }
+    }
+
+    private static bool TryAllocate(Dictionary<string, int> resources, string req)
+    {
+        if (resources.TryGetValue(req, out int available) && available > 0)
+        {
+            resources[req]--;
+            return true;
+        }
+        return false;
+    }
+  ```
+
+- Quiz answers recorded.
