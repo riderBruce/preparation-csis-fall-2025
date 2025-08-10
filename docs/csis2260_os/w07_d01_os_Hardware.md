@@ -64,14 +64,16 @@ for instr in instructions:
 ### ❓ Quiz
 
 1. Which CPU part performs arithmetic?
+
+- ALU (Arithmetic Logic Unit)
+
 2. Which step of the instruction cycle comes after fetch?
 
----
+- decode
 
-**✅ Deliverable for Day 1**
+### ✅ Deliverable for Day 1
 
 - Notes on CPU components & instruction cycle.
 - Completed pseudocode test.
 - Working code simulation in Python or JS.
 - Quiz answers recorded.
-
