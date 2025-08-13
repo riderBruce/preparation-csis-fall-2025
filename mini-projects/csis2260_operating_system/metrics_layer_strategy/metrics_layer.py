@@ -12,7 +12,7 @@ class SchedulingStrategy(Protocol):
     def dequeue_next(self, ready: Deque[Process]) -> Process: ...
 
 class Fcfs:
-    def deque_next(self, ready: Deque[Process]) -> Process:
+    def dequeue_next(self, ready: Deque[Process]) -> Process:
         return ready.popleft()
     
 class Sjf:
@@ -87,8 +87,8 @@ class Scheduler:
 
     def run(self):
         while self.ready:
-            p = self.strategy.deque_next(self.ready)
-            self.metrics.on_despatch(p)
+            p = self.strategy.dequeue_next(self.ready)
+            self.metrics.on_dispatch(p)
             run = min(self.quantum, p.remaining)
             p.remaining -= run
             self.metrics.on_execute(run)
