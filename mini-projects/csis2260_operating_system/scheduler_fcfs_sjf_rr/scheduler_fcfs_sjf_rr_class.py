@@ -1,6 +1,6 @@
 from collections import deque
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Protocol, Deque
 
 @dataclass
 class Process:

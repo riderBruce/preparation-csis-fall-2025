@@ -1,12 +1,19 @@
+
 from collections import deque
 from dataclasses import dataclass
-from typing import Deque, Protocol, Dict
+from typing import Deque, Protocol, Dict, List
 
 @dataclass
 class Process:
     pid: str
     remaining: int
     priority: int = 0
+
+@dataclass
+class Segment:
+    start: int
+    pid: str
+    duration: int
 
 class SchedulingStrategy(Protocol):
     def dequeue_next(self, ready: Deque[Process]) -> Process: ...
@@ -48,19 +55,38 @@ class Metrics:
         self.first_response: Dict[str, int] = {}
         self.finish_time: Dict[str, int] = {}
         self.burst_seen: Dict[str, bool] = {}
+        self.segments: List[Segment] = []
+        self._current_pid: str | None = None
+        self._current_start: int = 0
         self.now = 0
 
     def on_dispatch(self, p: Process):
         self.context_switches += 1
+        self._current_pid = p.pid # start of segment
+        self._current_start = self.now
         if p.pid not in self.burst_seen:
             self.first_response[p.pid] = self.now
             self.burst_seen[p.pid] = True
 
     def on_execute(self, run: int):
         self.now += run
+        if self._current_pid is not None:
+            self.segments.append(Segment(
+                start=self._current_start,
+                pid=self._current_pid,
+                duration=run
+            ))
+            self._current_pid = None # end of segment
     
     def on_complete(self, p: Process):
         self.finish_time[p.pid] = self.now
+
+    def format_gantt(self) -> str:
+        parts = []
+        for seg in self.segments:
+            parts.append(f"{seg.start} | {seg.pid} | ")
+        parts.append(f"{self.now} | Completed")
+        return "".join(parts)
 
     def summary(self, original_bursts: Dict[str, int]):
         res = {}
@@ -74,6 +100,8 @@ class Metrics:
             "per_process": res,
             "context_switches": self.context_switches,
             "makespan": self.now,
+            "Gantt_chart": self.format_gantt(),
+            "Segments": [seg.__dict__ for seg in self.segments]
         }
     
 class Scheduler:
@@ -106,6 +134,21 @@ if __name__ == "__main__":
         Process("P3", 8, priority=3),
     ])
     print("FCFS:", Scheduler(deque(base), Fcfs(), 10**9).run())
+    base = deque([
+        Process("P1", 5, priority=2),
+        Process("P2", 3, priority=1),
+        Process("P3", 8, priority=3),
+    ])
     print("SJF:", Scheduler(deque(base), Sjf(), 10**9).run())
+    base = deque([
+        Process("P1", 5, priority=2),
+        Process("P2", 3, priority=1),
+        Process("P3", 8, priority=3),
+    ])
     print("PRIO:", Scheduler(deque(base), PrioritySched(), 10**9).run())
+    base = deque([
+        Process("P1", 5, priority=2),
+        Process("P2", 3, priority=1),
+        Process("P3", 8, priority=3),
+    ])
     print("RR q=2:", Scheduler(deque(base), Fcfs(), 2).run())
