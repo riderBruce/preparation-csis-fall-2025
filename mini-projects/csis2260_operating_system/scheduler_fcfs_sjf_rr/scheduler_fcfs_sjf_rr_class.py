@@ -1,12 +1,13 @@
 from collections import deque
 from dataclasses import dataclass
+from typing import Protocol
 
 @dataclass
 class Process:
     pid: str
     remaining: int
 
-class SchedulingStrategy:
+class SchedulingStrategy(Protocol):
     def dequeue_next(self, ready: deque[Process]) -> Process:
         raise NotImplementedError
 

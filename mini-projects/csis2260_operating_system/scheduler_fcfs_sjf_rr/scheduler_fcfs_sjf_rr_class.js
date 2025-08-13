@@ -30,7 +30,6 @@ class RrStrategy {
 
 class Scheduler {
   constructor(ready, strategy, quantum) {
-    if (quantum <= 0) throw new Error("quantum must be > 0");
     this.ready = [...ready];
     this.strategy = strategy;
     this.quantum = quantum;
