@@ -231,3 +231,12 @@ public static class Demo {
   }
 }
 ```
+
+### Reflections
+
+- I think Scheduler deals what to do - main logic, and Stratagy takes how to do - sub logic, and Metrics cares about the figure data - results.
+- Stratagy classes are injected as a parameter, so when Scheduler is called, it's choosable.
+- Metrics class is injected as a property, so Metrics's property and method can be easily accessable.
+- Metrics class is just collection of datas that storable and how to store. I think Metrics data and method could be inside of Scheduler class, but just extracted to anothor class. Eventually the figure data will be got together inside of Metrics class, and make a summary for that.
+- I wonder if metrics's data is not complicated, it can be just with a object like just Dict. Also, extracting Segments to another class could be a good choice for scalablity.
+- As a result, I can easily access the final data with Metrics, and switch methods with same type of Strategy. It's easy with @dataclass inputting and carring data.  
