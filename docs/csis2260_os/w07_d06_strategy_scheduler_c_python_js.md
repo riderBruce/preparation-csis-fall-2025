@@ -240,3 +240,4 @@ public static class Demo {
 - Metrics class is just collection of datas that storable and how to store. I think Metrics data and method could be inside of Scheduler class, but just extracted to anothor class. Eventually the figure data will be got together inside of Metrics class, and make a summary for that.
 - I wonder if metrics's data is not complicated, it can be just with a object like just Dict. Also, extracting Segments to another class could be a good choice for scalablity.
 - As a result, I can easily access the final data with Metrics, and switch methods with same type of Strategy. It's easy with @dataclass inputting and carring data.  
+- Every object can be built with Dictionary, it could be built with a class.
